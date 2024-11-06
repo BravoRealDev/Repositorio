@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Exercicio10",
+            "request": "launch",
+            "mainClass": "Java.Exercicio10",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "Exercicio2",
             "request": "launch",
             "mainClass": "Java.Exercicio2",
