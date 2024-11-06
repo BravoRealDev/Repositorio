@@ -5,6 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Exercicio2",
+            "request": "launch",
+            "mainClass": "Java.Exercicio2",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "Exerciocio1",
+            "request": "launch",
+            "mainClass": "Java.Exerciocio1",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "Exerciocio1",
+            "request": "launch",
+            "mainClass": "Exerciocio1",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
             "type": "delegua",
             "request": "launch",
             "name": "Executar arquivo aberto",
