@@ -1,6 +1,6 @@
 package Java;
 
-public class Exercicio3 {
+public class TiposVariaveis {
     public static void main(String[] args) {
 
         byte b = 127;

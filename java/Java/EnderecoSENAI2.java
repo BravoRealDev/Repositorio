@@ -1,6 +1,6 @@
 package Java;
 
-public class Exercicio9 {
+public class EnderecoSENAI2 {
     public static void main(String[] args) {
 
         System.out.println("\nO endereço completo do SENAI Criciúma é: ");

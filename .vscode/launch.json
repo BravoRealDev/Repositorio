@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "OperadoresRelacionais",
+            "request": "launch",
+            "mainClass": "Java.OperadoresRelacionais",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "OperadoresAtribuicao",
+            "request": "launch",
+            "mainClass": "Java.OperadoresAtribuicao",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "OperadoresLogicos",
+            "request": "launch",
+            "mainClass": "Java.OperadoresLogicos",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "ConverteDias",
+            "request": "launch",
+            "mainClass": "Java.ConverteDias",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "Converte",
+            "request": "launch",
+            "mainClass": "Java.Converte",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "OperadorAritmetico",
+            "request": "launch",
+            "mainClass": "Java.OperadorAritmetico",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "Exercicio10",
             "request": "launch",
             "mainClass": "Java.Exercicio10",

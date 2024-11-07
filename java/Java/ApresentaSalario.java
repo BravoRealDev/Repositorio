@@ -1,6 +1,6 @@
 package Java;
 
-public class Exercicio7 {
+public class ApresentaSalario {
     public static void main(String[] args) {
         System.out.println("Olá");
         System.out.println("35");
