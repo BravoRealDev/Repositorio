@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PodeVotar",
+            "request": "launch",
+            "mainClass": "Java.PodeVotar",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "CalcularSalario",
+            "request": "launch",
+            "mainClass": "Java.CalcularSalario",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "OperadoresRelacionais",
             "request": "launch",
             "mainClass": "Java.OperadoresRelacionais",
