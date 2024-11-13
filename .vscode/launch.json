@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ConversorCedula",
+            "request": "launch",
+            "mainClass": "Java.ConversorCedula",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "PodeVotar",
             "request": "launch",
             "mainClass": "Java.PodeVotar",
