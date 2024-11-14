@@ -6,6 +6,48 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ContadorDeLetras",
+            "request": "launch",
+            "mainClass": "Java.ContadorDeLetras",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "ContarPalavra",
+            "request": "launch",
+            "mainClass": "Java.ContarPalavra",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "ContarVogais2",
+            "request": "launch",
+            "mainClass": "Java.ContarVogais2",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "novo",
+            "request": "launch",
+            "mainClass": "Java.novo",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "ContarVogais",
+            "request": "launch",
+            "mainClass": "Java.ContarVogais",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "AdivinhaNumero",
+            "request": "launch",
+            "mainClass": "Java.AdivinhaNumero",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "ConversorCedula",
             "request": "launch",
             "mainClass": "Java.ConversorCedula",
