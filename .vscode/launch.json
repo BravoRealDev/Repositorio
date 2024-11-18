@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "VerificaPalindromo",
+            "request": "launch",
+            "mainClass": "VerificaPalindromo",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "ContadorDeLetras",
             "request": "launch",
             "mainClass": "Java.ContadorDeLetras",
