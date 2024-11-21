@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Vetor",
+            "request": "launch",
+            "mainClass": "Java.Vetor",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "DegustacaoCha",
+            "request": "launch",
+            "mainClass": "DegustacaoCha",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
+            "name": "DegustacaoCha",
+            "request": "launch",
+            "mainClass": "java.DegustacaoCha",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "VerificaPalindromo",
             "request": "launch",
             "mainClass": "VerificaPalindromo",
