@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SubstituicaoVetores",
+            "request": "launch",
+            "mainClass": "SubstituicaoVetores",
+            "projectName": "BravoRepo_c70066"
+        },
+        {
+            "type": "java",
             "name": "Vetor",
             "request": "launch",
             "mainClass": "Java.Vetor",
