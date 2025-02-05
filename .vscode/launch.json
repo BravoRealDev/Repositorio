@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Contador",
+            "request": "launch",
+            "mainClass": "Contador",
+            "projectName": "Repositorio_79f18b27"
+        },
+        {
+            "type": "java",
+            "name": "MenuBanco",
+            "request": "launch",
+            "mainClass": "MenuBanco",
+            "projectName": "Repositorio_79f18b27"
+        },
+        {
+            "type": "java",
             "name": "SubstituicaoVetores",
             "request": "launch",
             "mainClass": "SubstituicaoVetores",
