@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Tabuada2",
+            "request": "launch",
+            "mainClass": "Tabuada2",
+            "projectName": "Repositorio_79f18b27"
+        },
+        {
+            "type": "java",
+            "name": "Tabuada",
+            "request": "launch",
+            "mainClass": "Tabuada",
+            "projectName": "Repositorio_79f18b27"
+        },
+        {
+            "type": "java",
+            "name": "Senha2",
+            "request": "launch",
+            "mainClass": "Senha2",
+            "projectName": "Repositorio_79f18b27"
+        },
+        {
+            "type": "java",
             "name": "Contador",
             "request": "launch",
             "mainClass": "Contador",
