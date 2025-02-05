@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAZ O L - Café Brasileiro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>FAZ O L</h1>
+        <p>O melhor café brasileiro para você!</p>
+    </header>
+
+    <main>
+        <section class="produtos">
+            <div class="produto">
+                <img src="pilao.jpg" alt="Café Pilão">
+                <h2>Café Pilão</h2>
+                <p>R$ 25,00</p>
+                <button onclick="adicionarAoCarrinho('Café Pilão', 25)">Comprar</button>
+            </div>
+            <div class="produto">
+                <img src="caboclo.jpg" alt="Café Caboclo">
+                <h2>Café Caboclo</h2>
+                <p>R$ 30,00</p>
+                <button onclick="adicionarAoCarrinho('Café Caboclo', 30)">Comprar</button>
+            </div>
+            <div class="produto">
+                <img src="melitta.jpg" alt="Café Melitta">
+                <h2>Café Melitta</h2>
+                <p>R$ 35,00</p>
+                <button onclick="adicionarAoCarrinho('Café Melitta', 35)">Comprar</button>
+            </div>
+        </section>
+
+        <aside class="carrinho">
+            <h2>Carrinho de Compras</h2>
+            <ul id="lista-carrinho"></ul>
+            <p>Subtotal: R$ <span id="subtotal">0,00</span></p>
+            <p>Imposto (27,25%): R$ <span id="imposto">0,00</span></p>
+            <p>Total: R$ <span id="total">0,00</span></p>
+            <button onclick="finalizarCompra()">Finalizar Compra</button>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 FAZ O L - Café Brasileiro. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
