@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CustoViagem",
+            "request": "launch",
+            "mainClass": "CustoViagem",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
             "name": "Media",
             "request": "launch",
             "mainClass": "Media",
