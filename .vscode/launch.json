@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CalculadoraCientificaGUI",
+            "request": "launch",
+            "mainClass": "CalculadoraCientificaGUI",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "CalculadoraCientifica2",
+            "request": "launch",
+            "mainClass": "CalculadoraCientifica2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Calculadora",
+            "request": "launch",
+            "mainClass": "Calculadora",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
             "name": "CustoViagem",
             "request": "launch",
             "mainClass": "CustoViagem",
