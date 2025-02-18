@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CalculoSalario2",
+            "request": "launch",
+            "mainClass": "CalculoSalario2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Media3",
+            "request": "launch",
+            "mainClass": "Media3",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Media2",
+            "request": "launch",
+            "mainClass": "Media2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
             "name": "CalculadoraCientificaGUI",
             "request": "launch",
             "mainClass": "CalculadoraCientificaGUI",
