@@ -6,6 +6,83 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CalculoSalario2",
+            "request": "launch",
+            "mainClass": "CalculoSalario2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Media3",
+            "request": "launch",
+            "mainClass": "Media3",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Media2",
+            "request": "launch",
+            "mainClass": "Media2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "CalculadoraCientificaGUI",
+            "request": "launch",
+            "mainClass": "CalculadoraCientificaGUI",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "CalculadoraCientifica2",
+            "request": "launch",
+            "mainClass": "CalculadoraCientifica2",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Calculadora",
+            "request": "launch",
+            "mainClass": "Calculadora",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "CustoViagem",
+            "request": "launch",
+            "mainClass": "CustoViagem",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "Media",
+            "request": "launch",
+            "mainClass": "Media",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "DiferenteDeZero",
+            "request": "launch",
+            "mainClass": "DiferenteDeZero",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "ContagemPares",
+            "request": "launch",
+            "mainClass": "ContagemPares",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
+            "name": "VerificaPar",
+            "request": "launch",
+            "mainClass": "VerificaPar",
+            "projectName": "Repositorio_82cb0c78"
+        },
+        {
+            "type": "java",
             "name": "Tabuada2",
             "request": "launch",
             "mainClass": "Tabuada2",
