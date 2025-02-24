@@ -1,0 +1,126 @@
+/* css/components/product.css */
+
+.product-detail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #2d3436;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .product-image {
+    flex: 1 1 400px;
+    max-width: 400px;
+    margin-right: 20px;
+  }
+  
+  .product-image img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .product-info {
+    flex: 1 1 600px;
+    max-width: 600px;
+  }
+  
+  .product-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--cor-secundaria);
+  }
+  
+  .product-price {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--cor-principal);
+    margin-bottom: 20px;
+  }
+  
+  .product-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+  }
+  
+  .product-features {
+    margin-bottom: 25px;
+  }
+  
+  .product-features h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .product-features ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .product-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
+  }
+  
+  .product-features li:last-child {
+    border-bottom: none;
+  }
+  
+  .product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-selector button {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .quantity-selector button:hover {
+    background-color: var(--cor-secundaria);
+  }
+  
+  .quantity-selector input {
+    width: 50px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin: 0 10px;
+    background-color: #1e272e;
+    color: var(--cor-texto);
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .product-detail {
+      flex-direction: column;
+    }
+  
+    .product-image {
+      max-width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .product-info {
+      max-width: 100%;
+    }
+  }

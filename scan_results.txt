@@ -1,0 +1,8 @@
+
+=== Escaneamento iniciado em 127.0.0.1 (2025-02-21 07:22:36) ===
+[2025-02-21 07:22:37] Porta 3389 está FECHADA ou FILTRADA
+=== Escaneamento concluído em 2025-02-21 07:22:37 ===
+
+=== Escaneamento iniciado em 127.0.0.1 (2025-02-21 07:23:12) ===
+[2025-02-21 07:23:13] Porta 23 está FECHADA ou FILTRADA
+=== Escaneamento concluído em 2025-02-21 07:23:14 ===

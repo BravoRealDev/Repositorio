@@ -1,0 +1,80 @@
+/* css/components/header.css */
+
+header {
+    background-color: rgba(30, 39, 46, 0.9); /* Fundo levemente transparente */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed; /* Fixa o header no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100; /* Garante que o header fique acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+  
+  header .logo img {
+    height: 50px; /* Ajuste o tamanho do logo */
+  }
+  
+  header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  header nav ul li {
+    margin-left: 20px;
+  }
+  
+  header nav ul li a {
+    color: var(--cor-texto);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  header nav ul li a:hover {
+    color: var(--cor-principal);
+  }
+  
+  header nav ul li a img {
+    height: 25px; /* Ajuste o tamanho do ícone do carrinho */
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  
+  header .carrinho-count {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    border-radius: 50%;
+    padding: 3px 6px;
+    font-size: 0.8rem;
+    position: relative;
+    top: -8px;
+    left: -5px;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    header .logo {
+      margin-bottom: 10px;
+    }
+  
+    header nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    header nav ul li {
+      margin: 10px 0;
+    }
+  }

@@ -1,0 +1,60 @@
+/* style.css */
+
+:root {
+    --cor-principal: #6c5ce7;
+    --cor-secundaria: #a29bfe;
+    --cor-texto: #fff;
+    --cor-fundo: #1e272e;
+    --fonte-principal: 'Roboto', sans-serif;
+  }
+  
+  body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  
+  a {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  .button {
+    background-color: var(--cor-principal);
+    color: var(--cor-texto);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: var(--cor-secundaria);
+  }
+  
+  h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Estilos para telas maiores */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+  }

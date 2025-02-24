@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suplementos Futuro</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/components/header.css">
+    <link rel="stylesheet" href="./css/components/footer.css">
+    <link rel="stylesheet" href="./css/components/home.css">
+    <link rel="stylesheet" href="./css/components/product.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="./js/script.js" defer></script>
+    <script src="./js/components/home.js" defer></script>
+    <script src="./js/components/product.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="/">
+        <img src="./img/logo.png" alt="Suplementos Futuro">
+      </a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#contato">Contato</a></li>
+        <li>
+          <a href="/carrinho">
+            <img src="./img/carrinho-de-compras.png" alt="Carrinho">
+            <span class="carrinho-count">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero">
+      <div class="hero-content">
+        <h1>Potencialize Seu Futuro</h1>
+        <p>Suplementos de alta performance para um você mais forte e focado.</p>
+        <a href="#produtos" class="button">Descubra Agora</a>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <h2>Nossos Produtos</h2>
+      <div class="produtos-grid">
+        <div class="produto">
+          <img src="./img/suplemento1.png" alt="Suplemento 1">
+          <h3>Nome do Suplemento 1</h3>
+          <p>Descrição rápida do suplemento.</p>
+          <span class="preco">R$ 99,90</span>
+          <a href="/produto/1" class="button">Ver Detalhes</a>
+        </div>
+          <div class="produto">
+            <img src="./img/suplemento2.png" alt="Suplemento 2">
+            <h3>Nome do Suplemento 2</h3>
+            <p>Descrição rápida do suplemento.</p>
+            <span class="preco">R$ 129,90</span>
+            <a href="/produto/2" class="button">Ver Detalhes</a>
+          </div>
+          <div class="produto">
+            <img src="./img/suplemento3.png" alt="Suplemento 3">
+            <h3>Nome do Suplemento 3</h3>
+            <p>Descrição rápida do suplemento.</p>
+            <span class="preco">R$ 79,90</span>
+            <a href="/produto/3" class="button">Ver Detalhes</a>
+          </div>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>Uma breve descrição da empresa, sua missão e visão futurista.</p>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <form>
+        <input type="text" placeholder="Nome">
+        <input type="email" placeholder="Email">
+        <textarea placeholder="Mensagem"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2024 Suplementos Futuro</p>
+  </footer>
+
+</body>
+</html>

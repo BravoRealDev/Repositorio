@@ -1,0 +1,10 @@
+/* css/components/footer.css */
+
+footer {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid var(--cor-secundaria);
+    margin-top: 50px;
+  }
