@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - Suplementos Futuro</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/components/header.css">
+    <link rel="stylesheet" href="./css/components/footer.css">
+    <link rel="stylesheet" href="./css/components/cart.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="./js/script.js" defer></script>
+    <script src="./js/carrinho.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <img src="./img/Suplementos Futuro Logo.jpg" alt="Suplementos Futuro">
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/#produtos">Produtos</a></li>
+                <li><a href="/#sobre">Sobre Nós</a></li>
+                <li><a href="/#contato">Contato</a></li>
+                <li>
+                    <a href="/carrinho">
+                        <img src="./img/carrinho-de-compras.png" alt="Carrinho">
+                        <span class="carrinho-count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="carrinho">
+        <section class="carrinho-itens">
+            <h2>Seu Carrinho</h2>
+            <div class="carrinho-lista">
+                <!-- Itens do carrinho serão adicionados aqui -->
+            </div>
+            <div class="carrinho-total">
+                <p>Subtotal: <span id="carrinho-subtotal">R$ 0,00</span></p>
+                <p>Frete: <span id="carrinho-frete">R$ 0,00</span></p>
+                <p>Total: <span id="carrinho-total">R$ 0,00</span></p>
+                <button id="finalizar-compra" class="button">Finalizar Compra</button>
+            </div>
+
+            <div class="carrinho-vazio" style="display: none;">
+                <p>Seu carrinho está vazio.</p>
+                <a href="/#produtos" class="button">Voltar para a loja</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Suplementos Futuro LTDA.</p>
+    </footer>
+
+</body>
+</html>

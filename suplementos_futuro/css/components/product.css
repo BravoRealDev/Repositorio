@@ -112,15 +112,20 @@
   @media (max-width: 768px) {
     .product-detail {
       flex-direction: column;
+      padding: 10px;
+
     }
   
     .product-image {
       max-width: 100%;
       margin-right: 0;
       margin-bottom: 20px;
+      align-items: center;
+
     }
   
     .product-info {
       max-width: 100%;
+      
     }
   }
