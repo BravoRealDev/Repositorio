@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Clima com Open-Meteo</title>
+</head>
+<body>
+    <h1>Previsão do Tempo</h1>
+    <label for="cidade">Digite a cidade: </label>
+    <input type="text" id="cidade" placeholder="Ex: São Paulo">
+    <button onclick="obterMeteorologia()">Buscar</button>
+    <p id="resultado"></p>
+
+    <script>
+        async function obterCoordenadas(cidade) {
+            const urlGeocoding = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cidade)}&count=1&language=pt`;
+            try {
+                const resposta = await fetch(urlGeocoding);
+                const dados = await resposta.json();
+                if (dados.results && dados.results.length > 0) {
+                    const { latitude, longitude, timezone } = dados.results[0];
+                    return { latitude, longitude, timezone };
+                } else {
+                    throw new Error('Cidade não encontrada');
+                }
+            } catch (erro) {
+                throw erro;
+            }
+        }
+
+        async function obterMeteorologia() {
+            const cidadeInput = document.getElementById('cidade').value.trim();
+            if (!cidadeInput) {
+                document.getElementById('resultado').innerHTML = 'Por favor, digite uma cidade.';
+                return;
+            }
+
+            try {
+                // Obtém coordenadas da cidade digitada
+                const { latitude, longitude, timezone } = await obterCoordenadas(cidadeInput);
+
+                // Monta a URL com as coordenadas obtidas
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}¤t=temperature_2m,weather_code&hourly=temperature_2m&timezone=${encodeURIComponent(timezone)}`;
+
+                const resposta = await fetch(url);
+                const dados = await resposta.json();
+
+                // Dados atuais
+                const temperaturaAtual = dados.current.temperature_2m;
+                const codigoClima = dados.current.weather_code;
+                const descricaoClima = interpretarCodigoClima(codigoClima);
+
+                // Próxima hora
+                const temperaturaProximaHora = dados.hourly.temperature_2m[0];
+                const horaAtual = new Date(dados.current.time).toLocaleTimeString('pt-BR');
+
+                // Exibe os resultados
+                const resultado = `
+                    Clima em ${cidadeInput} (Lat: ${latitude.toFixed(2)}, Lon: ${longitude.toFixed(2)}):<br>
+                    Horário: ${horaAtual}<br>
+                    Temperatura atual: ${temperaturaAtual}°C<br>
+                    Condição climática: ${descricaoClima}<br>
+                    Temperatura na próxima hora: ${temperaturaProximaHora}°C
+                `;
+                document.getElementById('resultado').innerHTML = resultado;
+            } catch (erro) {
+                document.getElementById('resultado').innerHTML = 'Erro: ' + erro.message;
+            }
+        }
+
+        // Função para interpretar códigos de clima (WMO)
+        function interpretarCodigoClima(codigo) {
+            const codigos = {
+                0: 'Céu limpo',
+                1: 'Poucas nuvens',
+                2: 'Parcialmente nublado',
+                3: 'Nublado',
+                45: 'Nevoeiro',
+                61: 'Chuva leve',
+                63: 'Chuva moderada',
+                65: 'Chuva forte',
+                95: 'Tempestade'
+            };
+            return codigos[codigo] || 'Desconhecido';
+        }
+    </script>
+</body>
+</html>
