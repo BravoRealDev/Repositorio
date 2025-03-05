@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gerenciamento de Dados</title>
+    <style>        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:active {
+            background-color: #003f80;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        #tabelasContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tabelaContainer {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.8em;
+        }
+
+        table button:hover {
+            background-color: #c82333;
+        }
+
+        table button:active {
+            background-color: #b21f2d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gerenciamento de Dados</h1>
+
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" placeholder="Nome">
+    </div>
+
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Email">
+    </div>
+
+    <div>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" placeholder="Telefone">
+    </div>
+
+    <button onclick="adicionarContato()">Adicionar Contato</button>
+    <button onclick="exibirContatos()">Exibir Contatos</button>
+    <button onclick="limparLista()">Limpar Lista</button>
+    <button onclick="criarTabelaDeDados()">Criar Tabela de Dados</button>
+    
+    <h2>Contatos:</h2>
+    <ul id="lista"></ul>
+
+    <div id="Resultado"></div>
+
+    <div id="tabelasContainer"></div>
+    
+
+    <script>        
+        let contatos = [];
+        let tabelas = [];
+
+        function adicionarContato() {
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const telefone = document.getElementById("telefone").value;
+
+            if (nome && email && telefone) {
+                contatos.push({ nome: nome, email: email, telefone: telefone });
+                atualizarListaContatos();
+                limparCampos();
+            } else {
+                alert("Por favor, preencha todos os campos.");
+            }
+        }
+
+        function atualizarListaContatos() {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+
+            for (let i = 0; i < contatos.length; i++) {
+                const contato = contatos[i];
+                const listItem = document.createElement("li");
+                listItem.textContent = `Nome: ${contato.nome}, Email: ${contato.email}, Telefone: ${contato.telefone}`;
+                lista.appendChild(listItem);
+            }
+        }
+
+        function exibirContatos() {
+            if (contatos.length === 0) {
+                alert("Nenhum contato adicionado.");
+                return;
+            }
+
+            let mensagem = "Lista de Contatos:\n";
+            for (let i = 0; i < contatos.length; i++) {
+                const contato = contatos[i];
+                mensagem += `Nome: ${contato.nome}, Email: ${contato.email}, Telefone: ${contato.telefone}\n`;
+            }
+            alert(mensagem);
+        }
+
+
+        function limparLista() {
+            contatos = [];
+            atualizarListaContatos();
+            alert("Lista de contatos limpa!");
+        }
+
+        function limparCampos() {
+            document.getElementById("nome").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("telefone").value = "";
+        }
+
+        function criarTabelaDeDados() {
+            const nomeTabela = prompt("Digite o nome para a nova tabela:");
+            if (!nomeTabela) return;
+
+            const headers = prompt("Digite os cabeçalhos da tabela separados por vírgula (ex: Nome,Idade,Cidade):");
+            if (!headers) return;
+
+            const headersArray = headers.split(",").map(header => header.trim());
+
+            const novaTabela = {
+                nome: nomeTabela,
+                headers: headersArray,
+                data: []
+            };
+
+            tabelas.push(novaTabela);
+            exibirTabelas();
+        }
+
+        function adicionarLinha(indiceTabela) {
+            const tabela = tabelas[indiceTabela];
+            const novaLinha = {};
+
+            for (const header of tabela.headers) {
+                const valor = prompt(`Digite o valor para a coluna "${header}":`);
+                if (valor === null) return;
+                novaLinha[header] = valor;
+            }
+
+            tabela.data.push(novaLinha);
+            exibirTabelas();
+        }
+
+        function limparLinha(indiceTabela, indiceLinha) {
+            if (confirm("Tem certeza que deseja remover esta linha?")) {
+                tabelas[indiceTabela].data.splice(indiceLinha, 1);
+                exibirTabelas();
+            }
+        }
+
+        function limparColuna(indiceTabela, indiceColuna) {
+            if (confirm("Tem certeza que deseja remover esta coluna e seus dados?")) {
+                const tabela = tabelas[indiceTabela];
+                const headerRemovido = tabela.headers[indiceColuna];
+
+                tabela.headers.splice(indiceColuna, 1);
+                
+                for (const linha of tabela.data) {
+                    delete linha[headerRemovido];
+                }
+
+                exibirTabelas();
+            }
+        }
+
+        function exibirTabelas() {
+            const tabelasContainer = document.getElementById("tabelasContainer");
+            tabelasContainer.innerHTML = "";
+
+            for (let i = 0; i < tabelas.length; i++) {
+                const tabela = tabelas[i];
+                const tabelaContainer = document.createElement("div");
+                tabelaContainer.classList.add("tabelaContainer");
+
+                const titulo = document.createElement("h3");
+                titulo.textContent = tabela.nome;
+                tabelaContainer.appendChild(titulo);
+
+                const tableElement = document.createElement("table");
+                const thead = document.createElement("thead");
+                const headerRow = document.createElement("tr");
+                
+                for (let j = 0; j < tabela.headers.length; j++) {
+                    const headerText = tabela.headers[j];
+                    const th = document.createElement("th");
+                    th.textContent = headerText;
+                    headerRow.appendChild(th);
+                    
+                    const botaoLimparColuna = document.createElement("button");
+                    botaoLimparColuna.textContent = "Limpar Coluna";
+                    botaoLimparColuna.onclick = () => limparColuna(i, j);
+                    th.appendChild(botaoLimparColuna);
+                }
+                thead.appendChild(headerRow);
+                tableElement.appendChild(thead);
+
+                const tbody = document.createElement("tbody");
+                
+                for (let k = 0; k < tabela.data.length; k++) {
+                    const linhaData = tabela.data[k];
+                    const dataRow = document.createElement("tr");
+
+                    for (const header of tabela.headers) {
+                        const td = document.createElement("td");
+                        td.textContent = linhaData[header] || "";
+                        dataRow.appendChild(td);
+                    }
+                    
+                    const botaoLimparLinha = document.createElement("button");
+                    botaoLimparLinha.textContent = "Limpar Linha";
+                    botaoLimparLinha.onclick = () => limparLinha(i, k);
+                    dataRow.appendChild(botaoLimparLinha);
+
+                    tbody.appendChild(dataRow);
+                }
+
+                tableElement.appendChild(tbody);
+                tabelaContainer.appendChild(tableElement);
+               
+                const botaoAdicionarLinha = document.createElement("button");
+                botaoAdicionarLinha.textContent = "Adicionar Linha";
+                botaoAdicionarLinha.onclick = () => adicionarLinha(i);
+                tabelaContainer.appendChild(botaoAdicionarLinha);
+
+                tabelasContainer.appendChild(tabelaContainer);
+            }
+        }
+
+    </script>
+
+</body>
+</html>

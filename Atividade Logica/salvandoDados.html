@@ -1,0 +1,26 @@
+<body>  
+    <input type="text" id="nome" placeholder="Nome">
+    <button onclick="salvar()">Salvar</button>
+    <ul id="lista"></ul>
+    
+    <button onclick="limpar()">Limpar</button>
+    
+   <script>
+        function salvar(){
+            var nome = document.getElementById("nome").value;
+            var lista = document.getElementById("lista");
+            var item = document.createElement("li");
+            item.innerHTML = nome;
+            lista.appendChild(item);
+            nome.value = "";
+        }
+        
+        function limpar(){
+            var lista = document.getElementById("lista");
+            lista.innerHTML = "";
+        }
+    </script>
+    
+    
+
+</body>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque Inteligente</title>
+    <style>       
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+
+        #menu {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #menu button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        #menu button:hover {
+            background-color: #0056b3;
+        }
+
+        #entradaDados {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+            color: #333;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        #tabelasContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .tabelaContainer {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #relatorios {
+            margin-top: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .alerta {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Controle de Estoque Inteligente</h1>
+
+    <div id="menu">
+        <button onclick="mostrarEntradaDados()">Adicionar Item</button>
+        <button onclick="consultarEstoque()">Consultar Estoque</button>
+        <button onclick="consultarTabelaSegmento()">Consultar Tabela por Segmento</button>
+        <button onclick="consultarTabelaCompleta()">Consultar Tabela Completa</button>
+        <button onclick="calcularEstoqueVivo()">Estoque Vivo</button>
+        <button onclick="calcularCustosOperacionais()">Custos Operacionais</button>
+        <button onclick="gerarRelatorioInventario()">Relatório de Inventário</button>
+        <button onclick="calcularGiroEstoque()">Giro de Estoque</button>
+        <button onclick="analiseCoberturaEstoque()">Análise de Cobertura de Estoque</button>
+    </div>
+
+    <div id="entradaDados" style="display: none;">
+        <h2>Adicionar Novo Item</h2>
+        <label for="nomeItem">Nome do Item:</label>
+        <input type="text" id="nomeItem">
+        <label for="segmentoItem">Segmento:</label>
+        <input type="text" id="segmentoItem">
+        <label for="quantidadeItem">Quantidade:</label>
+        <input type="number" id="quantidadeItem">
+        <label for="precoCusto">Preço de Custo:</label>
+        <input type="number" id="precoCusto">
+        <label for="precoVenda">Preço de Venda:</label>
+        <input type="number" id="precoVenda">
+        <button onclick="adicionarItem()">Adicionar</button>
+    </div>
+
+    <div id="tabelasContainer"></div>
+
+    <div id="relatorios">
+        <h2>Relatórios</h2>
+        <div id="relatorioEstoque"></div>
+        <div id="relatorioInventario"></div>
+        <div id="relatorioCustos"></div>
+        <div id="relatorioGiro"></div>
+        <div id="relatorioCobertura"></div>
+    </div>
+
+    <script>
+        const estoque = [];
+        let custosOperacionaisFixos = 0;
+        const segmentos = new Set();
+
+        function mostrarEntradaDados() {
+            document.getElementById("entradaDados").style.display = "block";
+        }
+
+        function adicionarItem() {
+            const nome = document.getElementById("nomeItem").value;
+            const segmento = document.getElementById("segmentoItem").value;
+            const quantidade = parseInt(document.getElementById("quantidadeItem").value);
+            const precoCusto = parseFloat(document.getElementById("precoCusto").value);
+            const precoVenda = parseFloat(document.getElementById("precoVenda").value);
+
+            if (nome && segmento && !isNaN(quantidade) && !isNaN(precoCusto) && !isNaN(precoVenda)) {
+                const item = { nome, segmento, quantidade, precoCusto, precoVenda };
+                estoque.push(item);
+                segmentos.add(segmento);
+                atualizarTabelas();
+                document.getElementById("entradaDados").style.display = "none";
+                limparCamposEntrada();
+                verificarAlertasEstoque(item);
+            } else {
+                alert("Por favor, preencha todos os campos corretamente.");
+            }
+        }
+
+        function consultarEstoque() {
+            let mensagem = "Estoque Atual:\n";
+            estoque.forEach(item => {
+                mensagem += `${item.nome} (${item.segmento}): ${item.quantidade} unidades\n`;
+            });
+            alert(mensagem);
+        }
+
+        function consultarTabelaSegmento() {
+            const segmento = prompt("Digite o segmento para consultar:");
+            if (segmento) {
+                const itensSegmento = estoque.filter(item => item.segmento === segmento);
+                exibirTabelaSegmento(segmento, itensSegmento);
+            }
+        }
+
+        function consultarTabelaCompleta() {
+            exibirTabelaCompleta();
+        }
+
+        function calcularEstoqueVivo() {
+            let valorTotal = 0;
+            estoque.forEach(item => {
+                valorTotal += item.quantidade * item.precoCusto;
+            });
+            alert(`Valor Total do Estoque Vivo: R$ ${valorTotal.toFixed(2)}`);
+        }
+
+        function calcularCustosOperacionais() {
+             custosOperacionaisFixos = parseFloat(prompt("Digite os custos operacionais fixos mensais:"));
+            if (isNaN(custosOperacionaisFixos)) {
+                alert("Por favor, insira um valor numérico válido para os custos operacionais.");
+                custosOperacionaisFixos = 0;
+                document.getElementById("relatorioCustos").innerHTML = "<p>Custos operacionais não definidos.</p>";
+            } else {
+                 gerarRelatorioCustos();
+            }
+
+        }
+
+        function gerarRelatorioInventario() {
+            let valorTotalEstoque = 0;
+            estoque.forEach(item => {
+                valorTotalEstoque += item.quantidade * item.precoVenda;
+            });
+            document.getElementById("relatorioInventario").innerHTML = `<p>Valor Total do Inventário (Preço de Venda): R$ ${valorTotalEstoque.toFixed(2)}</p>`;
+        }
+
+         function calcularGiroEstoque() {
+            const custoTotalProdutosVendidos = parseFloat(prompt("Digite o Custo Total dos Produtos Vendidos no período:"));
+
+            if (isNaN(custoTotalProdutosVendidos)) {
+                alert("Por favor, insira um valor numérico válido para o Custo Total dos Produtos Vendidos.");
+                return;
+            }
+
+            let valorTotalEstoqueCusto = 0;
+            estoque.forEach(item => {
+                valorTotalEstoqueCusto += item.quantidade * item.precoCusto;
+            });
+
+            if (valorTotalEstoqueCusto === 0) {
+                alert("O valor total do estoque a preço de custo é zero. Impossível calcular o giro de estoque.");
+                return;
+            }
+
+            const giroEstoque = custoTotalProdutosVendidos / valorTotalEstoqueCusto;
+            document.getElementById("relatorioGiro").innerHTML = `<p>Giro de Estoque: ${giroEstoque.toFixed(2)}</p>`;
+        }
+
+        function analiseCoberturaEstoque() {
+            const mediaVendasMensal = parseFloat(prompt("Digite a média de vendas mensal em unidades para o produto:"));
+
+            if (isNaN(mediaVendasMensal)) {
+                alert("Por favor, insira um valor numérico válido para a média de vendas mensal.");
+                return;
+            }
+
+            const nomeProduto = prompt("Digite o nome do produto para análise:");
+
+            if (!nomeProduto) {
+                alert("Por favor, digite o nome do produto para análise.");
+                return;
+            }
+
+            const item = estoque.find(item => item.nome === nomeProduto);
+
+            if (!item) {
+                alert("Produto não encontrado no estoque.");
+                return;
+            }
+
+            if (mediaVendasMensal === 0) {
+                alert("A média de vendas mensal é zero. Impossível calcular a cobertura de estoque.");
+                return;
+            }
+
+            const coberturaEstoque = item.quantidade / mediaVendasMensal;
+            document.getElementById("relatorioCobertura").innerHTML = `<p>Cobertura de Estoque para ${nomeProduto}: ${coberturaEstoque.toFixed(2)} meses</p>`;
+        }
+
+        function atualizarTabelas() {
+            const tabelasContainer = document.getElementById("tabelasContainer");
+            tabelasContainer.innerHTML = "";
+
+            segmentos.forEach(segmento => {
+                const itensSegmento = estoque.filter(item => item.segmento === segmento);
+                exibirTabelaSegmento(segmento, itensSegmento);
+            });
+        }
+
+        function exibirTabelaSegmento(segmento, itens) {
+            const tabelaContainer = document.createElement("div");
+            tabelaContainer.classList.add("tabelaContainer");
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = `Segmento: ${segmento}`;
+            tabelaContainer.appendChild(titulo);
+
+            const table = document.createElement("table");
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            ["Nome", "Quantidade", "Preço Custo", "Preço Venda"].forEach(headerText => {
+                const th = document.createElement("th");
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            itens.forEach(item => {
+                const dataRow = document.createElement("tr");
+                ["nome", "quantidade", "precoCusto", "precoVenda"].forEach(prop => {
+                    const td = document.createElement("td");
+                    td.textContent = item[prop];
+                    dataRow.appendChild(td);
+                });
+                tbody.appendChild(dataRow);
+            });
+            table.appendChild(tbody);
+
+            tabelaContainer.appendChild(table);
+            document.getElementById("tabelasContainer").appendChild(tabelaContainer);
+        }
+
+        function exibirTabelaCompleta() {
+            const tabelaContainer = document.createElement("div");
+            tabelaContainer.classList.add("tabelaContainer");
+
+            const titulo = document.createElement("h3");
+            titulo.textContent = "Tabela Completa de Estoque";
+            tabelaContainer.appendChild(titulo);
+
+            const table = document.createElement("table");
+            const thead = document.createElement("thead");
+            const headerRow = document.createElement("tr");
+            ["Nome", "Segmento", "Quantidade", "Preço Custo", "Preço Venda"].forEach(headerText => {
+                const th = document.createElement("th");
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement("tbody");
+            estoque.forEach(item => {
+                const dataRow = document.createElement("tr");
+                ["nome", "segmento", "quantidade", "precoCusto", "precoVenda"].forEach(prop => {
+                    const td = document.createElement("td");
+                    td.textContent = item[prop];
+                    dataRow.appendChild(td);
+                });
+                tbody.appendChild(dataRow);
+            });
+            table.appendChild(tbody);
+
+            tabelaContainer.appendChild(table);
+            document.getElementById("tabelasContainer").appendChild(tabelaContainer);
+        }
+
+        function limparCamposEntrada() {
+            document.getElementById("nomeItem").value = "";
+            document.getElementById("segmentoItem").value = "";
+            document.getElementById("quantidadeItem").value = "";
+            document.getElementById("precoCusto").value = "";
+            document.getElementById("precoVenda").value = "";
+        }
+        function verificarAlertasEstoque(item) {
+            const quantidadeMinimaAlerta = 10;
+            const elementoRelatorio = document.getElementById("relatorioEstoque");
+
+            if (item.quantidade < quantidadeMinimaAlerta) {
+                elementoRelatorio.innerHTML = `<p class="alerta">Alerta: O item ${item.nome} está com estoque baixo (${item.quantidade} unidades).</p>`;
+            } else {
+                elementoRelatorio.innerHTML = "";
+            }
+        }
+        function gerarRelatorioCustos() {
+            const elementoRelatorio = document.getElementById("relatorioCustos");
+            elementoRelatorio.innerHTML = `<p>Custos Operacionais Fixos Mensais: R$ ${custosOperacionaisFixos.toFixed(2)}</p>`;
+        }
+
+    </script>
+
+</body>
+</html>
