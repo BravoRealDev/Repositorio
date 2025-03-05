@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pokémon com PokéAPI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+        input, button {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Buscador de Pokémon</h1>
+    <label for="pokemon">Digite o nome do Pokémon: </label>
+    <input type="text" id="pokemon" placeholder="Ex: pikachu">
+    <button onclick="buscarPokemon()">Buscar</button>
+    <div id="resultado"></div>
+
+    <script>
+        async function buscarPokemon() {
+            const pokemonInput = document.getElementById('pokemon').value.trim().toLowerCase();
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (!pokemonInput) {
+                resultadoDiv.innerHTML = 'Por favor, digite o nome de um Pokémon.';
+                return;
+            }
+
+            const url = `https://pokeapi.co/api/v2/pokemon/${pokemonInput}`;
+
+            try {
+                const resposta = await fetch(url);
+                if (!resposta.ok) {
+                    throw new Error('Pokémon não encontrado');
+                }
+                const dados = await resposta.json();
+
+                // Extrai informações
+                const nome = dados.name.charAt(0).toUpperCase() + dados.name.slice(1); // Capitaliza o nome
+                const numero = dados.id;
+                const tipos = dados.types.map(tipo => tipo.type.name).join(', ');
+                const imagem = dados.sprites.front_default;
+
+                // Exibe os resultados
+                resultadoDiv.innerHTML = `
+                    <h2>${nome} (#${numero})</h2>
+                    <p><strong>Tipo(s):</strong> ${tipos}</p>
+                    <img src="${imagem}" alt="${nome}">
+                `;
+            } catch (erro) {
+                resultadoDiv.innerHTML = `Erro: ${erro.message}`;
+            }
+        }
+
+        // Permite buscar ao pressionar Enter
+        document.getElementById('pokemon').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                buscarPokemon();
+            }
+        });
+    </script>
+</body>
+</html>
