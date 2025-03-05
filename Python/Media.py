@@ -6,4 +6,4 @@ peso2 = 3
 peso3 = 5
 media = (num1 * peso1 + num2 * peso2 + num3 * peso3) / (peso1 + peso2 + peso3)
 
-print(f"MEDIA = {media:.1f}")
+print(f"A média é = {media:.1f}")
