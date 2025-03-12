@@ -1,0 +1,215 @@
+ /* styles.css */
+
+/* Reset básico e configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilização da Navbar (ajustes personalizados) */
+.navbar {
+    background-color: #1a1a1a !important; /* Cor mais escura para contraste */
+    padding: 1rem 2rem;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.navbar-nav .nav-link {
+    color: #fff !important;
+    font-size: 1.1rem;
+    margin-left: 1rem;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #00b4d8 !important; /* Cor de destaque ao passar o mouse */
+}
+
+/* Estilização do container principal */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 15px;
+}
+
+/* Seção de produtos */
+#produtos {
+    margin-bottom: 3rem;
+}
+
+#produtos h2 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Estilização dos cards de produtos (exemplo) */
+.produto-card {
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+}
+
+.produto-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.produto-card h3 {
+    font-size: 1.25rem;
+    margin: 1rem 0 0.5rem;
+    color: #1a1a1a;
+}
+
+.produto-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+.produto-card .btn {
+    background-color: #00b4d8;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.produto-card .btn:hover {
+    background-color: #0096c7;
+}
+
+/* Seção do carrinho */
+#carrinho {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#carrinho h2 {
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+}
+
+#carrinho table {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+#carrinho table th,
+#carrinho table td {
+    padding: 1rem;
+    text-align: center;
+}
+
+#carrinho .btn {
+    background-color: #00b4d8;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+#carrinho .btn:hover {
+    background-color: #0096c7;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .navbar-nav .nav-link {
+        margin-left: 0;
+        font-size: 1rem;
+    }
+
+    .container {
+        margin: 1rem auto;
+    }
+
+    #produtos h2,
+    #carrinho h2 {
+        font-size: 1.5rem;
+    }
+
+    .produto-card {
+        margin-bottom: 1.5rem;
+    }
+
+    #carrinho {
+        padding: 1.5rem;
+    }
+}
+
+section {
+    margin-bottom: 3rem;
+}
+
+/* Estilização específica para a seção de contato */
+#contato {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#contato h2 {
+    font-size: 1.75rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#contato p {
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+}
+
+#contato a {
+    color: #00b4d8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#contato a:hover {
+    color: #0096c7;
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #contato {
+        padding: 1.5rem;
+    }
+
+    #contato h2 {
+        font-size: 1.5rem;
+    }
+}
