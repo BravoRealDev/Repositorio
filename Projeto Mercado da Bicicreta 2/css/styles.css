@@ -1,0 +1,31 @@
+/* styles.css */
+.carrinho-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Esconde o carrinho fora da tela */
+    width: 400px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.carrinho-sidebar.ativo {
+    right: 0; /* Mostra o carrinho */
+}
+
+.carrinho-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#fecharCarrinho {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

@@ -1,11 +1,10 @@
-// script.js
-
 class CarrinhoDeCompras {
     constructor() {
         console.log('CarrinhoDeCompras inicializado');
         this.items = JSON.parse(localStorage.getItem('carrinho')) || [];
         console.log('Itens carregados do localStorage:', this.items);
         this.atualizarTabelaCarrinho();
+        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade ao carregar a página
     }
 
     adicionarItem(produto) {
@@ -21,6 +20,8 @@ class CarrinhoDeCompras {
         }
         this.salvarCarrinho();
         this.atualizarTabelaCarrinho();
+        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade após adicionar
+        this.mostrarMensagemSucesso(); // Mostra a mensagem de sucesso
     }
 
     removerItem(id) {
@@ -28,6 +29,7 @@ class CarrinhoDeCompras {
         this.items = this.items.filter(item => item.id !== id);
         this.salvarCarrinho();
         this.atualizarTabelaCarrinho();
+        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade após remover
     }
 
     salvarCarrinho() {
@@ -82,6 +84,22 @@ class CarrinhoDeCompras {
             totalElement.innerHTML = `<strong>Total: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>`;
         }
     }
+
+    atualizarQuantidadeCarrinho() {
+        const quantidade = this.items.reduce((acc, item) => acc + item.quantidade, 0);
+        const quantidadeElement = document.getElementById('quantidade-carrinho');
+        if (quantidadeElement) {
+            quantidadeElement.textContent = quantidade;
+        }
+    }
+
+    mostrarMensagemSucesso() {
+        const mensagem = document.getElementById('mensagem-sucesso');
+        mensagem.style.display = 'block'; // Mostra a mensagem
+        setTimeout(() => {
+            mensagem.style.display = 'none'; // Oculta a mensagem após 1,5 segundos
+        }, 1500);
+    }
 }
 
 // Instancia o carrinho
@@ -108,11 +126,31 @@ document.querySelectorAll('.produto-card .btn').forEach(button => {
 });
 
 // Evento para o botão "Finalizar Compra"
-document.querySelector('#carrinho .btn').addEventListener('click', () => {
+document.getElementById('finalizarCompra').addEventListener('click', () => {
     console.log('Botão "Finalizar Compra" clicado');
     if (carrinho.items.length === 0) {
         alert('Seu carrinho está vazio!');
     } else {
-        alert('Compra finalizada com sucesso! (Funcionalidade a ser implementada)');
+        alert('Compra finalizada com sucesso!');
+        carrinho.items = []; // Limpa o carrinho
+        carrinho.salvarCarrinho(); // Atualiza o localStorage
+        carrinho.atualizarTabelaCarrinho(); // Atualiza a tabela
+        carrinho.atualizarQuantidadeCarrinho(); // Atualiza o ícone de quantidade
     }
+});
+
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const carrinhoSidebar = document.getElementById('carrinhoSidebar');
+    const abrirCarrinho = document.getElementById('abrirCarrinho');
+    const fecharCarrinho = document.getElementById('fecharCarrinho');
+
+    abrirCarrinho.addEventListener('click', function(e) {
+        e.preventDefault();
+        carrinhoSidebar.classList.add('ativo');
+    });
+
+    fecharCarrinho.addEventListener('click', function() {
+        carrinhoSidebar.classList.remove('ativo');
+    });
 });

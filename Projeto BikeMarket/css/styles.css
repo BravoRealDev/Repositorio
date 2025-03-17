@@ -101,69 +101,74 @@ body {
     background-color: #0096c7;
 }
 
-/* Seção do carrinho */
-#carrinho {
+/* styles.css */
+.carrinho-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Esconde o carrinho fora da tela */
+    width: 400px;
+    height: 100%;
     background-color: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
 }
 
-#carrinho h2 {
-    font-size: 1.75rem;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
+.carrinho-sidebar.ativo {
+    right: 0; /* Mostra o carrinho */
 }
 
-#carrinho table {
-    width: 100%;
-    margin-bottom: 1.5rem;
+.carrinho-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-#carrinho table th,
-#carrinho table td {
-    padding: 1rem;
-    text-align: center;
-}
-
-#carrinho .btn {
-    background-color: #00b4d8;
+#fecharCarrinho {
+    background: none;
     border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-#carrinho .btn:hover {
-    background-color: #0096c7;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 /* Responsividade */
+@media (max-width: 1200px) {
+    .carrinho-sidebar {
+        width: 350px; /* Largura menor para telas médias */
+        right: -350px; /* Ajusta a posição inicial */
+    }
+
+    .carrinho-sidebar.ativo {
+        right: 0;
+    }
+}
+
+/* Telas pequenas (abaixo de 768px) */
 @media (max-width: 768px) {
-    .navbar-brand {
-        font-size: 1.25rem;
+    .carrinho-sidebar {
+        width: 100%; /* Ocupa toda a largura em telas pequenas */
+        right: -100%; /* Ajusta a posição inicial */
     }
 
-    .navbar-nav .nav-link {
-        margin-left: 0;
-        font-size: 1rem;
+    .carrinho-sidebar.ativo {
+        right: 0;
     }
 
-    .container {
-        margin: 1rem auto;
+    .carrinho-header h2 {
+        font-size: 1.2rem; /* Reduz o tamanho do título em telas pequenas */
     }
 
-    #produtos h2,
-    #carrinho h2 {
-        font-size: 1.5rem;
+    #carrinho th,
+    #carrinho td {
+        padding: 8px; /* Reduz o espaçamento da tabela */
     }
 
-    .produto-card {
-        margin-bottom: 1.5rem;
-    }
-
-    #carrinho {
-        padding: 1.5rem;
+    .btn {
+        padding: 8px 16px; /* Reduz o tamanho dos botões */
+        font-size: 0.9rem;
     }
 }
 
@@ -212,4 +217,32 @@ section {
     #contato h2 {
         font-size: 1.5rem;
     }
+}
+
+/* styles.css */
+.mensagem-sucesso {
+    position: fixed;
+    top: 10px;
+    right: 550px;
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    display: none; /* Inicialmente oculta */
+    animation: fadeOut 1s ease-in-out; /* Animação para desaparecer */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.badge {
+    margin-left: 5px;
+    font-size: 0.8rem;
+    padding: 5px 8px;
+    border-radius: 50%;
 }
