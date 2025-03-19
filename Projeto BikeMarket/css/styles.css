@@ -16,8 +16,13 @@ body {
 
 /* Estilização da Navbar (ajustes personalizados) */
 .navbar {
-    background-color: #1a1a1a !important; /* Cor mais escura para contraste */
+    background-color: #1a1a1a !important;
     padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0 0 10px 10px;
+    position: sticky;
+    top: 0; /* Garante que a navbar permaneça no topo */
+    z-index: 100; /* Garante que a navbar fique acima de outros elementos */
 }
 
 .navbar-brand {
@@ -34,7 +39,7 @@ body {
 }
 
 .navbar-nav .nav-link:hover {
-    color: #00b4d8 !important; /* Cor de destaque ao passar o mouse */
+    color: #00b4d8 !important;
 }
 
 /* Estilização do container principal */
@@ -56,7 +61,7 @@ body {
     text-align: center;
 }
 
-/* Estilização dos cards de produtos (exemplo) */
+/* Estilização dos cards de produtos */
 .produto-card {
     background-color: #fff;
     border: none;
@@ -68,7 +73,7 @@ body {
 }
 
 .produto-card:hover {
-    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+    transform: translateY(-5px);
 }
 
 .produto-card img {
@@ -101,23 +106,25 @@ body {
     background-color: #0096c7;
 }
 
-/* styles.css */
+/* Carrinho Lateral */
 .carrinho-sidebar {
     position: fixed;
     top: 0;
-    right: -400px; /* Esconde o carrinho fora da tela */
+    left: -400px; /* Esconde o carrinho fora da tela */
     width: 400px;
     height: 100%;
     background-color: #fff;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    transition: right 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2); /* Sombra mais forte */
+    transition: left 0.3s ease;
     padding: 20px;
     z-index: 1000;
-    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
+    overflow-y: auto;
+    display: flex; /* Novo: Para o layout flexível */
+    flex-direction: column; /* Novo: Coloca os itens em coluna */
 }
 
 .carrinho-sidebar.ativo {
-    right: 0; /* Mostra o carrinho */
+    left: 0;
 }
 
 .carrinho-header {
@@ -125,6 +132,13 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding-bottom: 10px; /* Adiciona um pouco de espaço */
+    border-bottom: 1px solid #eee; /* Linha divisória sutil */
+}
+
+.carrinho-header h2 {
+    font-size: 1.5rem; /* Tamanho da fonte maior */
+    color: #333; /* Cor do texto mais escura */
 }
 
 #fecharCarrinho {
@@ -132,94 +146,77 @@ body {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-}
-
-/* Responsividade */
-@media (max-width: 1200px) {
-    .carrinho-sidebar {
-        width: 350px; /* Largura menor para telas médias */
-        right: -350px; /* Ajusta a posição inicial */
-    }
-
-    .carrinho-sidebar.ativo {
-        right: 0;
-    }
-}
-
-/* Telas pequenas (abaixo de 768px) */
-@media (max-width: 768px) {
-    .carrinho-sidebar {
-        width: 100%; /* Ocupa toda a largura em telas pequenas */
-        right: -100%; /* Ajusta a posição inicial */
-    }
-
-    .carrinho-sidebar.ativo {
-        right: 0;
-    }
-
-    .carrinho-header h2 {
-        font-size: 1.2rem; /* Reduz o tamanho do título em telas pequenas */
-    }
-
-    #carrinho th,
-    #carrinho td {
-        padding: 8px; /* Reduz o espaçamento da tabela */
-    }
-
-    .btn {
-        padding: 8px 16px; /* Reduz o tamanho dos botões */
-        font-size: 0.9rem;
-    }
-}
-
-section {
-    margin-bottom: 3rem;
-}
-
-/* Estilização específica para a seção de contato */
-#contato {
-    background-color: #fff;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#contato h2 {
-    font-size: 1.75rem;
-    color: #1a1a1a;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-#contato p {
-    font-size: 1rem;
-    color: #666;
-    text-align: center;
-}
-
-#contato a {
-    color: #00b4d8;
-    text-decoration: none;
+    color: #777; /* Cor do ícone mais clara */
     transition: color 0.3s ease;
 }
 
-#contato a:hover {
-    color: #0096c7;
-    text-decoration: underline;
+#fecharCarrinho:hover {
+    color: #333; /* Escurece o ícone no hover */
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    #contato {
-        padding: 1.5rem;
-    }
-
-    #contato h2 {
-        font-size: 1.5rem;
-    }
+/* Estilos da tabela do carrinho */
+#carrinho {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-/* styles.css */
+#carrinho th,
+#carrinho td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee; /* Linha mais clara */
+}
+
+#carrinho th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #555; /* Cor do texto mais suave */
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+#carrinho tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+#carrinho tfoot {
+    font-weight: bold;
+}
+
+#carrinho-total {
+    text-align: right;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Estilos dos botões */
+#finalizarCompra,
+#limparCarrinho {
+    background-color: #00b4d8;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espaçamento acima dos botões */
+}
+
+#limparCarrinho {
+    background-color: #dc3545;
+}
+
+#finalizarCompra:hover {
+    background-color: #0096c7;
+}
+
+#limparCarrinho:hover {
+    background-color: #c82333;
+}
+
+/* Mensagem de sucesso */
 .mensagem-sucesso {
     position: fixed;
     top: 10px;
@@ -230,8 +227,8 @@ section {
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 2000;
-    display: none; /* Inicialmente oculta */
-    animation: fadeOut 1s ease-in-out; /* Animação para desaparecer */
+    display: none;
+    animation: fadeOut 1s ease-in-out;
 }
 
 @keyframes fadeOut {
@@ -240,6 +237,7 @@ section {
     100% { opacity: 0; }
 }
 
+/* Badge do carrinho */
 .badge {
     margin-left: 5px;
     font-size: 0.8rem;
@@ -247,30 +245,72 @@ section {
     border-radius: 50%;
 }
 
-/* Estilos para o campo de busca e o botão de limpar */
-form { /* Ou o seletor correto para o seu formulário de busca */
-  position: relative; /* Necessário para o posicionamento absoluto do botão */
-  display: flex; /* Use flexbox para alinhar o input e o botão */
-  align-items: center; /* Alinha verticalmente os itens */
+/* Estilos do formulário de busca */
+form {
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 #searchInput {
-  padding-right: 30px; /* Espaço para o botão não sobrepor o texto */
-  width: 100%; /* Ocupa toda a largura disponível */
+    padding-right: 30px;
+    width: 100%;
 }
 
 .clear-search-button {
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2em;
-  color: #888; /* Cor cinza clara para o ícone */
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #888;
 }
 
 .clear-search-button:hover {
-  color: #333; /* Escurece ao passar o mouse */
+    color: #333;
 }
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .carrinho-sidebar {
+        width: 100%;
+        left: -100%;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    #produtos .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .produto-card {
+        margin-bottom: 20px;
+    }
+
+    .carrinho-header h2 {
+        font-size: 1.3rem;
+    }
+
+    #carrinho th,
+    #carrinho td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    #carrinho-total {
+        font-size: 1rem;
+    }
+
+    #finalizarCompra,
+    #limparCarrinho {
+        font-size: 0.9rem;
+    }
+}
+
+/* Adicione mais estilos responsivos conforme necessário */

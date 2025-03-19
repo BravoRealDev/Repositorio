@@ -34,13 +34,28 @@ class CarrinhoDeCompras {
         }
 
         if (quantidade >= itemExistente.quantidade) {
-            this.items = this.items.filter(item => item.id !== id);
-            console.log('Item removido do carrinho.');
+            this.removerItemTotalmente(id); // Remove o item totalmente
         } else {
             itemExistente.quantidade -= quantidade;
             console.log('Quantidade decrementada:', itemExistente);
+            this.salvarCarrinho();
         }
 
+        this.atualizarTabelaCarrinho();
+        this.atualizarQuantidadeCarrinho();
+    }
+
+    removerItemTotalmente(id) {
+        console.log('Removendo item totalmente com ID:', id);
+        this.items = this.items.filter(item => item.id !== id);
+        this.salvarCarrinho();
+        this.atualizarTabelaCarrinho();
+        this.atualizarQuantidadeCarrinho();
+    }
+
+    limparCarrinho() {
+        console.log('Limpando o carrinho completamente');
+        this.items = [];
         this.salvarCarrinho();
         this.atualizarTabelaCarrinho();
         this.atualizarQuantidadeCarrinho();
@@ -64,13 +79,14 @@ class CarrinhoDeCompras {
         this.items.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${item.nome}</td>
-                <td>R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                <td>${item.quantidade}</td>
-                <td>R$ ${(item.preco * item.quantidade).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                <td>
-                    <button class="btn btn-success btn-sm aumentar-quantidade" data-id="${item.id}">+</button>
-                    <button class="btn btn-danger btn-sm diminuir-quantidade" data-id="${item.id}">-</button>
+                <td data-label="Nome">${item.nome}</td>
+                <td data-label="Preço">R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td data-label="Quantidade">${item.quantidade}</td>
+                <td data-label="Total">R$ ${(item.preco * item.quantidade).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                <td data-label="Ações" class="carrinho-acoes">
+                    <button class="btn btn-outline-success btn-sm aumentar-quantidade" data-id="${item.id}">+</button>
+                    <button class="btn btn-outline-danger btn-sm diminuir-quantidade" data-id="${item.id}">-</button>
+                    <button class="btn btn-outline-danger btn-sm remover-item" data-id="${item.id}">Excluir</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -80,7 +96,7 @@ class CarrinhoDeCompras {
             button.addEventListener('click', (e) => {
                 const id = parseInt(e.target.dataset.id);
                 console.log('Clique em aumentar quantidade do item com ID:', id);
-                this.adicionarItem({ id: id }, 1); // Adiciona 1 unidade
+                this.adicionarItem({ id: id }, 1);
             });
         });
 
@@ -88,7 +104,15 @@ class CarrinhoDeCompras {
             button.addEventListener('click', (e) => {
                 const id = parseInt(e.target.dataset.id);
                 console.log('Clique em diminuir quantidade do item com ID:', id);
-                this.removerItem(id, 1); // Remove 1 unidade
+                this.removerItem(id, 1);
+            });
+        });
+
+        document.querySelectorAll('.remover-item').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                console.log('Clique em remover item totalmente com ID:', id);
+                this.removerItemTotalmente(id);
             });
         });
 
@@ -147,7 +171,7 @@ function adicionarIconeLimparBusca() {
     const clearButton = document.createElement('button');
     clearButton.type = 'button';
     clearButton.innerHTML = '×'; // Ícone "x"
-    clearButton.classList.add('clear-search-button');  // Adicione a classe CSS
+    clearButton.classList.add('clear-search-button');
 
     // Adicione um estilo básico para posicionar o botão
     clearButton.style.position = 'absolute';
@@ -157,16 +181,15 @@ function adicionarIconeLimparBusca() {
     clearButton.style.background = 'none';
     clearButton.style.border = 'none';
     clearButton.style.cursor = 'pointer';
-    clearButton.style.fontSize = '1.2em'; // Ajuste o tamanho do ícone
+    clearButton.style.fontSize = '1.2em';
 
     // Adicione o botão logo após o input
     searchInput.parentNode.insertBefore(clearButton, searchInput.nextSibling);
 
     clearButton.addEventListener('click', function() {
         searchInput.value = '';
-        // Disparar o evento 'input' no campo de pesquisa para atualizar os resultados.
         searchInput.dispatchEvent(new Event('input'));
-        searchInput.focus(); // Devolve o foco para o input
+        searchInput.focus();
     });
 
     // Ajuste o estilo do form para posicionamento relativo, se necessário
@@ -232,6 +255,10 @@ document.getElementById('finalizarCompra').addEventListener('click', () => {
         carrinho.atualizarTabelaCarrinho();
         carrinho.atualizarQuantidadeCarrinho();
     }
+});
+
+document.getElementById('limparCarrinho').addEventListener('click', () => {
+    carrinho.limparCarrinho();
 });
 
 

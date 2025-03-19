@@ -69,6 +69,31 @@
                         <button class="btn">Adicionar ao Carrinho</button>
                     </div>
                 </div>
+                <!-- Adicionando mais produtos -->
+                <div class="col-md-4">
+                    <div class="produto-card">
+                        <img src="images/capacete.jpg" alt="Capacete">
+                        <h3>Capacete</h3>
+                        <p>R$ 199,00</p>
+                        <button class="btn">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="produto-card">
+                        <img src="images/luvas.jpg" alt="Luvas">
+                        <h3>Luvas</h3>
+                        <p>R$ 79,00</p>
+                        <button class="btn">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="produto-card">
+                        <img src="images/kit de reparo.jpg" alt="Kit de Reparo">
+                        <h3>Kit de Reparo</h3>
+                        <p>R$ 49,00</p>
+                        <button class="btn">Adicionar ao Carrinho</button>
+                    </div>
+                </div>
             </div>
         </section>
        
@@ -103,7 +128,9 @@
                 <!-- Itens serão adicionados dinamicamente pelo JavaScript -->
             </tbody>
         </table>
-        <button id="finalizarCompra" class="btn">Finalizar Compra</button>
+        <button id="limparCarrinho" class="btn btn-danger">Limpar Carrinho</button>
+        <div id="carrinho-total" style="text-align: right;"></div> <!-- Lugar para o total -->
+        <button id="finalizarCompra" class="btn btn-success">Finalizar Compra</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
