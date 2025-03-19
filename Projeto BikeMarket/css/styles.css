@@ -1,4 +1,4 @@
- /* styles.css */
+/* styles.css */
 
 /* Reset básico e configurações gerais */
 * {
@@ -245,4 +245,32 @@ section {
     font-size: 0.8rem;
     padding: 5px 8px;
     border-radius: 50%;
+}
+
+/* Estilos para o campo de busca e o botão de limpar */
+form { /* Ou o seletor correto para o seu formulário de busca */
+  position: relative; /* Necessário para o posicionamento absoluto do botão */
+  display: flex; /* Use flexbox para alinhar o input e o botão */
+  align-items: center; /* Alinha verticalmente os itens */
+}
+
+#searchInput {
+  padding-right: 30px; /* Espaço para o botão não sobrepor o texto */
+  width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.clear-search-button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #888; /* Cor cinza clara para o ícone */
+}
+
+.clear-search-button:hover {
+  color: #333; /* Escurece ao passar o mouse */
 }

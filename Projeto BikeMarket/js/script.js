@@ -4,33 +4,48 @@ class CarrinhoDeCompras {
         this.items = JSON.parse(localStorage.getItem('carrinho')) || [];
         console.log('Itens carregados do localStorage:', this.items);
         this.atualizarTabelaCarrinho();
-        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade ao carregar a página
+        this.atualizarQuantidadeCarrinho();
     }
 
-    adicionarItem(produto) {
-        console.log('Adicionando item:', produto);
+    adicionarItem(produto, quantidade = 1) {
+        console.log('Adicionando item:', produto, 'Quantidade:', quantidade);
         const itemExistente = this.items.find(item => item.id === produto.id);
         if (itemExistente) {
-            itemExistente.quantidade += 1;
+            itemExistente.quantidade += quantidade;
             console.log('Quantidade incrementada:', itemExistente);
         } else {
-            produto.quantidade = 1;
+            produto.quantidade = quantidade;
             this.items.push(produto);
             console.log('Novo item adicionado:', produto);
         }
         this.salvarCarrinho();
         this.atualizarTabelaCarrinho();
-        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade após adicionar
-        this.mostrarMensagemSucesso(); // Mostra a mensagem de sucesso
+        this.atualizarQuantidadeCarrinho();
+        this.mostrarMensagemSucesso();
     }
 
-    removerItem(id) {
-        console.log('Removendo item com ID:', id);
-        this.items = this.items.filter(item => item.id !== id);
+    removerItem(id, quantidade = 1) {
+        console.log('Removendo item com ID:', id, 'Quantidade:', quantidade);
+        const itemExistente = this.items.find(item => item.id === id);
+
+        if (!itemExistente) {
+            console.log('Item não encontrado no carrinho.');
+            return;
+        }
+
+        if (quantidade >= itemExistente.quantidade) {
+            this.items = this.items.filter(item => item.id !== id);
+            console.log('Item removido do carrinho.');
+        } else {
+            itemExistente.quantidade -= quantidade;
+            console.log('Quantidade decrementada:', itemExistente);
+        }
+
         this.salvarCarrinho();
         this.atualizarTabelaCarrinho();
-        this.atualizarQuantidadeCarrinho(); // Atualiza a quantidade após remover
+        this.atualizarQuantidadeCarrinho();
     }
+
 
     salvarCarrinho() {
         localStorage.setItem('carrinho', JSON.stringify(this.items));
@@ -53,18 +68,30 @@ class CarrinhoDeCompras {
                 <td>R$ ${item.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                 <td>${item.quantidade}</td>
                 <td>R$ ${(item.preco * item.quantidade).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                <td><button class="btn btn-danger btn-sm remover-item" data-id="${item.id}">Remover</button></td>
+                <td>
+                    <button class="btn btn-success btn-sm aumentar-quantidade" data-id="${item.id}">+</button>
+                    <button class="btn btn-danger btn-sm diminuir-quantidade" data-id="${item.id}">-</button>
+                </td>
             `;
             tbody.appendChild(tr);
         });
 
-        document.querySelectorAll('.remover-item').forEach(button => {
+        document.querySelectorAll('.aumentar-quantidade').forEach(button => {
             button.addEventListener('click', (e) => {
                 const id = parseInt(e.target.dataset.id);
-                console.log('Clique em remover item com ID:', id);
-                this.removerItem(id);
+                console.log('Clique em aumentar quantidade do item com ID:', id);
+                this.adicionarItem({ id: id }, 1); // Adiciona 1 unidade
             });
         });
+
+        document.querySelectorAll('.diminuir-quantidade').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                console.log('Clique em diminuir quantidade do item com ID:', id);
+                this.removerItem(id, 1); // Remove 1 unidade
+            });
+        });
+
 
         this.atualizarTotal();
     }
@@ -95,17 +122,76 @@ class CarrinhoDeCompras {
 
     mostrarMensagemSucesso() {
         const mensagem = document.getElementById('mensagem-sucesso');
-        mensagem.style.display = 'block'; // Mostra a mensagem
+        mensagem.style.display = 'block';
         setTimeout(() => {
-            mensagem.style.display = 'none'; // Oculta a mensagem após 1,5 segundos
+            mensagem.style.display = 'none';
         }, 1500);
     }
 }
 
-// Instancia o carrinho
+
+function removerAcentos(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+// Adicionado Ícone de Limpar Busca
+function adicionarIconeLimparBusca() {
+    const searchInput = document.getElementById('searchInput');
+    const searchForm = searchInput.closest('form');
+
+    if (!searchInput || !searchForm) {
+        console.error('Elemento de busca não encontrado.');
+        return;
+    }
+
+    const clearButton = document.createElement('button');
+    clearButton.type = 'button';
+    clearButton.innerHTML = '×'; // Ícone "x"
+    clearButton.classList.add('clear-search-button');  // Adicione a classe CSS
+
+    // Adicione um estilo básico para posicionar o botão
+    clearButton.style.position = 'absolute';
+    clearButton.style.right = '5px';
+    clearButton.style.top = '50%';
+    clearButton.style.transform = 'translateY(-50%)';
+    clearButton.style.background = 'none';
+    clearButton.style.border = 'none';
+    clearButton.style.cursor = 'pointer';
+    clearButton.style.fontSize = '1.2em'; // Ajuste o tamanho do ícone
+
+    // Adicione o botão logo após o input
+    searchInput.parentNode.insertBefore(clearButton, searchInput.nextSibling);
+
+    clearButton.addEventListener('click', function() {
+        searchInput.value = '';
+        // Disparar o evento 'input' no campo de pesquisa para atualizar os resultados.
+        searchInput.dispatchEvent(new Event('input'));
+        searchInput.focus(); // Devolve o foco para o input
+    });
+
+    // Ajuste o estilo do form para posicionamento relativo, se necessário
+    searchForm.style.position = 'relative';
+}
+
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const searchTerm = removerAcentos(document.getElementById('searchInput').value);
+    const produtos = document.querySelectorAll('.produto-card');
+
+    produtos.forEach(produto => {
+        const nomeProduto = removerAcentos(produto.querySelector('h3').textContent);
+        if (nomeProduto.includes(searchTerm)) {
+            produto.style.display = 'block';
+        } else {
+            produto.style.display = 'none';
+        }
+    });
+});
+
+
 const carrinho = new CarrinhoDeCompras();
 
-// Adiciona eventos aos botões "Adicionar ao Carrinho"
 document.querySelectorAll('.produto-card .btn').forEach(button => {
     button.addEventListener('click', (e) => {
         console.log('Botão "Adicionar ao Carrinho" clicado');
@@ -120,26 +206,35 @@ document.querySelectorAll('.produto-card .btn').forEach(button => {
             nome: card.querySelector('h3').textContent,
             preco: parseFloat(precoTexto),
         };
-        console.log('Produto a ser adicionado:', produto);
-        carrinho.adicionarItem(produto);
+
+        // Solicita a quantidade ao usuário
+        const quantidade = parseInt(prompt(`Quantas unidades de ${produto.nome} você deseja adicionar?`, '1'));
+
+        if (isNaN(quantidade) || quantidade <= 0) {
+            alert('Quantidade inválida. Adicionando 1 unidade.');
+            carrinho.adicionarItem(produto, 1);
+        } else {
+            carrinho.adicionarItem(produto, quantidade);
+        }
+
+
     });
 });
 
-// Evento para o botão "Finalizar Compra"
 document.getElementById('finalizarCompra').addEventListener('click', () => {
     console.log('Botão "Finalizar Compra" clicado');
     if (carrinho.items.length === 0) {
         alert('Seu carrinho está vazio!');
     } else {
         alert('Compra finalizada com sucesso!');
-        carrinho.items = []; // Limpa o carrinho
-        carrinho.salvarCarrinho(); // Atualiza o localStorage
-        carrinho.atualizarTabelaCarrinho(); // Atualiza a tabela
-        carrinho.atualizarQuantidadeCarrinho(); // Atualiza o ícone de quantidade
+        carrinho.items = [];
+        carrinho.salvarCarrinho();
+        carrinho.atualizarTabelaCarrinho();
+        carrinho.atualizarQuantidadeCarrinho();
     }
 });
 
-// script.js
+
 document.addEventListener('DOMContentLoaded', function() {
     const carrinhoSidebar = document.getElementById('carrinhoSidebar');
     const abrirCarrinho = document.getElementById('abrirCarrinho');
@@ -153,4 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
     fecharCarrinho.addEventListener('click', function() {
         carrinhoSidebar.classList.remove('ativo');
     });
+
+    adicionarIconeLimparBusca(); // Chama a função para adicionar o ícone quando a página carrega
 });
