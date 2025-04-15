@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Consultas | Saúde Pública</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="assets/icons/health-icon.png">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Sistema de Saúde Pública</h1>
+            <p>Gestão integrada de saúde para a população</p>
+        </div>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="paciente-consulta.html" class="active">Consultas</a>
+            <a href="paciente-exames.html">Exames</a>
+            <a href="paciente-historico.html">Histórico</a>
+            <a href="#" onclick="logout()">Sair</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="dashboard-section">
+            <div class="hero-content">
+                <h2>Minhas Consultas</h2>
+                <p>Acompanhe suas consultas médicas agendadas.</p>
+            </div>
+            <div class="dashboard-content">
+                <table id="tabelaConsultas">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Médico</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Consultas serão carregadas aqui -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2023 Sistema de Saúde Pública. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
+            if (!usuarioLogado || usuarioLogado.tipo !== 'PACIENTE') {
+                window.location.href = "paciente-login.html";
+            }
+
+            // Simulação de consultas
+            const consultas = [
+                { data: "2023-07-20", horario: "14:00", medico: "Dr. João", status: "Confirmada" },
+                { data: "2023-07-25", horario: "10:00", medico: "Dra. Maria", status: "Pendente" }
+            ];
+
+            const tabelaConsultas = document.getElementById('tabelaConsultas').querySelector('tbody');
+            consultas.forEach(c => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${c.data}</td>
+                    <td>${c.horario}</td>
+                    <td>${c.medico}</td>
+                    <td>${c.status}</td>
+                `;
+                tabelaConsultas.appendChild(row);
+            });
+        });
+
+        function logout() {
+            sessionStorage.removeItem('usuarioLogado');
+            window.location.href = "paciente-login.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde Pública - Gestão</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="assets/icons/health-icon.png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Sistema de Saúde Pública</h1>
+            <p>Gestão integrada de saúde para a população</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="paciente-login.html">Área do Paciente</a></li>
+                <li><a href="medico-login.html">Área do Médico</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Bem-vindo ao Sistema de Gestão de Saúde</h2>
+                <p>Agende consultas, consulte resultados de exames e gerencie sua saúde de forma simples e acessível.</p>
+                <div class="hero-buttons">
+                    <a href="paciente-cadastro.html" class="btn primary">Cadastre-se</a>
+                    <a href="paciente-login.html" class="btn secondary">Login Paciente</a>
+                    <a href="medico-login.html" class="btn secondary">Login Médico</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="servicos" class="services-section">            
+            <div class="services-grid">
+                <div class="service-card" id="agendamento-card">
+                    <div class="service-icon">📅</div>
+                    <h4>Agendamento Online</h4>
+                    <p>Marque suas consultas de forma rápida e prática, sem sair de casa.</p>
+                </div>
+                <div class="service-card" id="diagnostico-card">
+                    <div class="service-icon">🩺</div>
+                    <h4>Diagnóstico Médico</h4>
+                    <p>Área exclusiva para médicos registrarem diagnósticos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal de Login -->
+        <div id="login-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Login Necessário</h3>
+                <p id="modal-message">Você precisa fazer login para acessar este serviço.</p>
+                <div class="modal-buttons">
+                    <a href="paciente-login.html" class="btn primary">Login como Paciente</a>
+                    <a href="medico-login.html" class="btn secondary">Login como Médico</a>
+                </div>
+            </div>
+        </div>
+        
+        <section id="sobre" class="about-section">
+            <h3>Sobre o Sistema</h3>
+            <p>Nosso objetivo é facilitar o acesso à saúde pública, integrando pacientes e médicos em uma única plataforma segura e eficiente.</p>
+        </section>
+        
+        <section id="contato" class="contact-section">
+            <h3>Contato</h3>
+            <p>Entre em contato conosco para mais informações sobre o sistema.</p>
+            <address>
+                Email: <a href="mailto:contato@saudepublica.com">contato@saudepublica.com</a><br>
+                Telefone: (XX) XXXX-XXXX
+            </address>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Adicionando script JS -->    
+    <script src="public/js/script.js"></script>
+    <script>
+        // Atualiza o ano atual no footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

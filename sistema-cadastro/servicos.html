@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços Médicos | Saúde Pública</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="assets/icons/health-icon.png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Sistema de Saúde Pública</h1>
+            <p>Gestão integrada de saúde para a população</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="servicos.html" class="active">Serviços</a></li>
+                <li><a href="paciente-login.html">Área do Paciente</a></li>
+                <li><a href="medico-login.html">Área do Médico</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="services-section">
+            <div class="section-header">
+                <h2>Serviços Médicos Disponíveis</h2>
+                <p>Selecione a especialidade para agendar sua consulta</p>
+                <div class="search-filter">
+                    <input type="text" id="searchInput" placeholder="Pesquisar especialidade...">
+                    <select id="filterCategory">
+                        <option value="all">Todas as categorias</option>
+                        <option value="clinica">Clínica Geral</option>
+                        <option value="especializada">Especializada</option>
+                        <option value="exames">Exames</option>
+                        <option value="procedimentos">Procedimentos</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="services-grid" id="servicesContainer">
+                <!-- Serviços serão carregados dinamicamente aqui -->
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="public/js/script.js"></script>
+</body>
+</html>

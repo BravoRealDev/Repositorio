@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Exames | Saúde Pública</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <link rel="icon" href="assets/icons/health-icon.png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Sistema de Saúde Pública</h1>
+            <p>Gestão integrada de saúde para a população</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="paciente-consulta.html">Consultas</a></li>
+                <li><a href="paciente-exames.html" class="active">Exames</a></li>
+                <li><a href="paciente-historico.html">Histórico</a></li>
+                <li><a href="#" id="logout-btn">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="dashboard-section">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">P</div>
+                    <div>
+                        <p class="user-name" id="user-name">Paciente</p>
+                        <small>Área do Paciente</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-content">
+                <h2>Meus Exames</h2>
+                <p class="section-description">Acompanhe os resultados dos seus exames.</p>
+                
+                <div class="table-container">
+                    <table class="results-table" id="tabelaExames">
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Exames serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="table-actions">
+                    <button class="btn secondary" id="limpar-exames-btn">Limpar Exames Cancelados</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="public/js/script.js"></script>
+</body>
+</html>
