@@ -163,31 +163,42 @@ header nav ul li a:hover {
 /* Calendário de Horários */
 .calendario-container {
     margin-top: 30px;
+    
 }
 
 .calendario-container h3 {
     margin-bottom: 15px;
     color: #2c3e50;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr); 
 }
 
 .calendario {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;    
+    width: 100%;   
+    gap: 5px;
+    margin-top: 20px;
+    padding: 20px;
 }
 
-.horario-btn {
+.horario-btn {     
     padding: 10px;
-    background-color: #2ecc71;
-    color: white;
-    border: none;
+    background-color: #37d679;
+    color: rgb(5, 5, 5);
+    border: black 1px solid;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100px;
+    
+    
+    
 }
 
 .horario-btn:hover {
-    background-color: #27ae60;
+    background-color: #288f53;
 }
 
 .horario-btn.ocupado {
