@@ -6,6 +6,7 @@
     <title>Minhas Consultas | Saúde Pública</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="assets/icons/health-icon.png">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
     <header>
@@ -14,11 +15,16 @@
             <p>Gestão integrada de saúde para a população</p>
         </div>
         <nav>
-            <a href="index.html">Início</a>
-            <a href="paciente-consulta.html" class="active">Consultas</a>
-            <a href="paciente-exames.html">Exames</a>
-            <a href="paciente-historico.html">Histórico</a>
-            <a href="#" onclick="logout()">Sair</a>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="paciente-consulta.html" class="active">Consultas</a></li>
+                <li><a href="paciente-exames.html">Exames</a></li>
+                <li><a href="paciente-historico.html">Histórico</a></li>
+                <li><a href="servicos.html">Serviços</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="#" id="logout-btn">Sair</a></li>
+            </ul>
         </nav>
     </header>
     
@@ -36,10 +42,11 @@
                             <th>Horário</th>
                             <th>Médico</th>
                             <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Consultas serão carregadas aqui -->
+                        <!-- Consultas serão carregadas via JavaScript -->
                     </tbody>
                 </table>
             </div>
@@ -47,39 +54,7 @@
     </main>
     
     <footer>
-        <p>&copy; 2023 Sistema de Saúde Pública. Todos os direitos reservados.</p>
+        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
     </footer>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
-            if (!usuarioLogado || usuarioLogado.tipo !== 'PACIENTE') {
-                window.location.href = "paciente-login.html";
-            }
-
-            // Simulação de consultas
-            const consultas = [
-                { data: "2023-07-20", horario: "14:00", medico: "Dr. João", status: "Confirmada" },
-                { data: "2023-07-25", horario: "10:00", medico: "Dra. Maria", status: "Pendente" }
-            ];
-
-            const tabelaConsultas = document.getElementById('tabelaConsultas').querySelector('tbody');
-            consultas.forEach(c => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${c.data}</td>
-                    <td>${c.horario}</td>
-                    <td>${c.medico}</td>
-                    <td>${c.status}</td>
-                `;
-                tabelaConsultas.appendChild(row);
-            });
-        });
-
-        function logout() {
-            sessionStorage.removeItem('usuarioLogado');
-            window.location.href = "paciente-login.html";
-        }
-    </script>
 </body>
 </html>

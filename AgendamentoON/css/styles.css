@@ -1,0 +1,403 @@
+/* Reset e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #1a252f;
+}
+
+/* Header */
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #3498db;
+}
+
+#login-btn {
+    background-color: #3498db;
+    padding: 8px 15px;
+}
+
+#login-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #3498db;
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* Seção de Agendamento */
+.agendamento {
+    padding: 60px 0;
+    background-color: white;
+}
+
+.agendamento h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.agendamento-form {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.form-group select, 
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#agendar-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    margin-top: 20px;
+    background-color: #3498db;
+}
+
+#agendar-btn:hover {
+    background-color: #2980b9;
+}
+
+#agendar-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+/* Calendário de Horários */
+.calendario-container {
+    margin-top: 30px;
+}
+
+.calendario-container h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.horario-btn {
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.horario-btn:hover {
+    background-color: #27ae60;
+}
+
+.horario-btn.ocupado {
+    background-color: #e74c3c;
+    cursor: not-allowed;
+}
+
+.horario-btn.selecionado {
+    background-color: #3498db;
+    font-weight: bold;
+}
+
+/* Seção de Minhas Consultas */
+.consultas {
+    padding: 60px 0;
+    background-color: #f5f7fa;
+}
+
+.consultas h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.consulta-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.consulta-card h3 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.consulta-card p {
+    margin-bottom: 5px;
+}
+
+.consulta-card .consulta-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.consulta-card .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #e74c3c;
+}
+
+.consulta-card .btn:hover {
+    background-color: #c0392b;
+}
+
+/* Modal de Login */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: #e74c3c;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+    }
+    
+    header nav ul {
+        margin-top: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    header nav ul li {
+        margin: 10px 0;
+    }
+    
+    .hero h2 {
+        font-size: 28px;
+    }
+    
+    .hero p {
+        font-size: 16px;
+    }
+    
+    .calendario {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+}
+
+/* Seção de Especialidades */
+.especialidades {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.especialidades .subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #7f8c8d;
+}
+
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.especialidade-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.especialidade-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.especialidade-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.especialidade-content {
+    padding: 20px;
+}
+
+.especialidade-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.especialidade-content p {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.disponibilidade {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.disponibilidade i {
+    margin-right: 8px;
+}
+
+.disponivel {
+    color: #2ecc71;
+}
+
+.indisponivel {
+    color: #e74c3c;
+}
+
+.especialidade-btn {
+    display: block;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.especialidade-btn:hover {
+    background-color: #2980b9;
+}
+
+.especialidade-btn.desabilitado {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}

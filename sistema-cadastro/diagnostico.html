@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Diagnóstico | Saúde Pública</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/icons/health-icon.png">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <h1>Sistema de Saúde Pública</h1>
+            <p>Gestão integrada de saúde para a população</p>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="medico-diagnostico.html">Voltar</a></li>
+                <li><a href="#" id="logout-btn">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="dashboard-section">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="user-avatar">M</div>
+                    <div>
+                        <p class="user-name" id="user-name">Médico</p>
+                        <small>Área Médica</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-content">
+                <h2>Registrar Novo Diagnóstico</h2>
+                <p class="section-description">Preencha os dados abaixo para registrar um novo diagnóstico médico</p>
+                
+                <form id="formDiagnostico" class="medical-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pacienteCpf">CPF do Paciente</label>
+                            <input type="text" id="pacienteCpf" name="cpf" required placeholder="Digite o CPF do paciente">
+                            <button type="button" id="buscarPaciente" class="btn secondary">Buscar Paciente</button>
+                        </div>
+                    </div>
+                    
+                    <div id="dadosPaciente" class="patient-data" style="display: none;">
+                        <h3>Dados do Paciente</h3>
+                        <div class="patient-info-grid">
+                            <div>
+                                <p><strong>Nome:</strong> <span id="pacienteNome">-</span></p>
+                                <p><strong>Data Nasc.:</strong> <span id="pacienteNascimento">-</span></p>
+                            </div>
+                            <div>
+                                <p><strong>Cartão SUS:</strong> <span id="pacienteSUS">-</span></p>
+                                <p><strong>Última Consulta:</strong> <span id="pacienteUltimaConsulta">-</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="dataConsulta">Data da Consulta</label>
+                        <input type="datetime-local" id="dataConsulta" name="dataConsulta" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sintomas">Sintomas Relatados</label>
+                        <textarea id="sintomas" name="sintomas" rows="3" required placeholder="Descreva os sintomas relatados pelo paciente"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="diagnostico">Diagnóstico</label>
+                        <textarea id="diagnostico" name="diagnostico" rows="3" required placeholder="Informe o diagnóstico médico"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="prescricao">Prescrição Médica</label>
+                        <textarea id="prescricao" name="prescricao" rows="3" placeholder="Medicamentos, tratamentos ou orientações"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observacoes">Observações Adicionais</label>
+                        <textarea id="observacoes" name="observacoes" rows="2" placeholder="Outras observações relevantes"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn primary">Salvar Diagnóstico</button>
+                        <button type="button" id="cancelarBtn" class="btn secondary">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="main-footer">
+        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

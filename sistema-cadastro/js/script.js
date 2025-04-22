@@ -228,32 +228,95 @@ function setupMedicoArea() {
         document.getElementById('user-name').textContent = auth.currentUser.nome || 'Médico';
         document.getElementById('user-avatar').textContent = auth.currentUser.nome ? auth.currentUser.nome.charAt(0).toUpperCase() : 'M';
 
-        // Simulação de diagnósticos
-        const diagnosticos = [
-            { paciente: "João Silva", data: "2023-07-15", diagnostico: "Hipertensão" },
-            { paciente: "Maria Oliveira", data: "2023-07-18", diagnostico: "Diabetes Tipo 2" }
-        ];
+        // Função para carregar e exibir diagnósticos
+        function carregarDiagnosticos() {
+            const diagnosticos = JSON.parse(localStorage.getItem('diagnosticos')) || [];
+            const diagnosticosMedico = diagnosticos.filter(d => d.medicoCrm === auth.currentUser.crm);
 
-        const tabelaDiagnosticos = document.getElementById('tabelaDiagnosticos').querySelector('tbody');
-        diagnosticos.forEach(d => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${d.paciente}</td>
-                <td>${d.data}</td>
-                <td>${d.diagnostico}</td>
-                <td>
-                    <button class="btn-icon edit" title="Editar">✏️</button>
-                    <button class="btn-icon delete" title="Excluir">🗑️</button>
-                </td>
-            `;
-            tabelaDiagnosticos.appendChild(row);
-        });
+            const tabelaDiagnosticos = document.getElementById('tabelaDiagnosticos').querySelector('tbody');
+            tabelaDiagnosticos.innerHTML = '';
+
+            if (diagnosticosMedico.length === 0) {
+                tabelaDiagnosticos.innerHTML = '<tr><td colspan="4">Nenhum diagnóstico registrado</td></tr>';
+            } else {
+                diagnosticosMedico.forEach(d => {
+                    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+                    const paciente = pacientes.find(p => p.cpf === d.pacienteCpf);
+                    const nomePaciente = paciente ? paciente.nome : 'Paciente não encontrado';
+
+                    const row = document.createElement('tr');
+                    row.dataset.id = d.id; // Adiciona ID do diagnóstico como atributo
+                    row.innerHTML = `
+                        <td>${nomePaciente}</td>
+                        <td>${new Date(d.data).toLocaleDateString('pt-BR')}</td>
+                        <td>${d.diagnostico}</td>
+                        <td>
+                            <button class="btn-icon edit" title="Editar" data-id="${d.id}">✏️</button>
+                            <button class="btn-icon delete" title="Excluir" data-id="${d.id}">🗑️</button>
+                        </td>
+                    `;
+                    tabelaDiagnosticos.appendChild(row);
+                });
+
+                 // Adiciona eventos aos botões de edição e exclusão
+                 document.querySelectorAll('.edit').forEach(btn => {
+                    btn.addEventListener('click', editarDiagnostico);
+                });
+
+                document.querySelectorAll('.delete').forEach(btn => {
+                    btn.addEventListener('click', excluirDiagnostico);
+                });
+
 
         document.getElementById('novo-diagnostico').addEventListener('click', function() {
-            alert('Funcionalidade de novo diagnóstico será implementada aqui');
+            window.location.href = 'diagnostico.html';
+        });
+
+        // Função para editar diagnóstico
+        function editarDiagnostico(e) {
+            const diagnosticoId = e.target.getAttribute('data-id');
+            const diagnosticos = JSON.parse(localStorage.getItem('diagnosticos')) || [];
+            const diagnostico = diagnosticos.find(d => d.id == diagnosticoId);
+
+            if (diagnostico) {
+                // Armazena o diagnóstico a ser editado
+                sessionStorage.setItem('diagnosticoEditando', JSON.stringify(diagnostico));
+                // Redireciona para a página de edição (pode ser a mesma de novo diagnóstico)
+                window.location.href = 'medico-novo-diagnostico.html?edit=true';
+            }
+        }
+
+        // Função para excluir diagnóstico
+        function excluirDiagnostico(e) {
+            if (confirm('Tem certeza que deseja excluir este diagnóstico?')) {
+                const diagnosticoId = e.target.getAttribute('data-id');
+                const diagnosticos = JSON.parse(localStorage.getItem('diagnosticos')) || [];
+                
+                // Filtra removendo o diagnóstico selecionado
+                const diagnosticosAtualizados = diagnosticos.filter(d => d.id != diagnosticoId);
+                
+                // Atualiza localStorage
+                localStorage.setItem('diagnosticos', JSON.stringify(diagnosticosAtualizados));
+                
+                // Recarrega a lista
+                carregarDiagnosticos();
+                alert('Diagnóstico excluído com sucesso!');
+            }
+        }
+
+        // Carrega os diagnósticos inicialmente
+        carregarDiagnosticos();
+
+        // Botão para novo diagnóstico
+        document.getElementById('novo-diagnostico').addEventListener('click', function() {
+            sessionStorage.removeItem('diagnosticoEditando');
+            window.location.href = 'medico-novo-diagnostico.html';
         });
     }
 }
+    }
+}
+
 
 // Logout
 function setupLogout() {
@@ -691,6 +754,348 @@ const termsContent = {
       });
     });
   }
-  
 
+// Função para buscar paciente por CPF
+function buscarPaciente() {
+    const cpf = document.getElementById('pacienteCpf').value.replace(/\D/g, '');
+    
+    if (cpf.length !== 11) {
+        alert('CPF inválido. Digite os 11 números do CPF.');
+        return;
+    }
+    
+    // Simulação de busca no "banco de dados"
+    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+    const paciente = pacientes.find(p => p.cpf === cpf);
+    
+    if (paciente) {
+        document.getElementById('pacienteNome').textContent = paciente.nome;
+        document.getElementById('pacienteNascimento').textContent = new Date(paciente.dataNascimento).toLocaleDateString('pt-BR');
+        document.getElementById('pacienteSUS').textContent = paciente.cartaoSUS || 'Não informado';
+        
+        // Busca última consulta
+        const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+        const ultimaConsulta = consultas
+            .filter(c => c.pacienteCpf === cpf)
+            .sort((a, b) => new Date(b.data) - new Date(a.data))[0];
+        
+        document.getElementById('pacienteUltimaConsulta').textContent = ultimaConsulta 
+            ? new Date(ultimaConsulta.data).toLocaleString('pt-BR') 
+            : 'Nenhuma consulta registrada';
+        
+        document.getElementById('dadosPaciente').style.display = 'block';
+    } else {
+        alert('Paciente não encontrado. Verifique o CPF digitado.');
+        document.getElementById('dadosPaciente').style.display = 'none';
+    }
+}
+
+// Função para salvar diagnóstico
+function salvarDiagnostico(e) {
+    e.preventDefault();
+    
+    // Verifica autenticação
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser || currentUser.tipo !== 'medico') {
+        alert('Acesso não autorizado');
+        window.location.href = 'medico-login.html';
+        return;
+    }
+    
+    // Obtém e valida CPF
+    const cpf = document.getElementById('pacienteCpf').value.replace(/\D/g, '');
+    if (cpf.length !== 11) {
+        alert('CPF inválido. Digite os 11 números do CPF.');
+        return;
+    }
+    
+    // Verifica se paciente existe
+    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+    const paciente = pacientes.find(p => p.cpf === cpf);
+    if (!paciente) {
+        alert('Paciente não encontrado. Verifique o CPF digitado.');
+        return;
+    }
+    
+    // Valida campos obrigatórios
+    const camposObrigatorios = [
+        { id: 'dataConsulta', nome: 'Data da Consulta' },
+        { id: 'sintomas', nome: 'Sintomas' },
+        { id: 'diagnostico', nome: 'Diagnóstico' }
+    ];
+    
+    for (const campo of camposObrigatorios) {
+        if (!document.getElementById(campo.id).value.trim()) {
+            alert(`O campo ${campo.nome} é obrigatório!`);
+            return;
+        }
+    }
+    
+    // Cria objeto do diagnóstico
+    const novoDiagnostico = {
+        id: Date.now(),
+        pacienteCpf: cpf,
+        pacienteNome: paciente.nome, // Adiciona nome do paciente
+        medicoCrm: currentUser.crm,
+        medicoNome: currentUser.nome,
+        data: document.getElementById('dataConsulta').value,
+        sintomas: document.getElementById('sintomas').value,
+        diagnostico: document.getElementById('diagnostico').value,
+        prescricao: document.getElementById('prescricao').value || '',
+        observacoes: document.getElementById('observacoes').value || '',
+        dataRegistro: new Date().toISOString()
+    };
+    
+    try {
+        // Salva diagnóstico
+        const diagnosticos = JSON.parse(localStorage.getItem('diagnosticos')) || [];
+        diagnosticos.push(novoDiagnostico);
+        localStorage.setItem('diagnosticos', JSON.stringify(diagnosticos));
+        
+        // Atualiza lista de consultas
+        const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+        consultas.push({
+            id: novoDiagnostico.id,
+            pacienteCpf: cpf,
+            medicoCrm: currentUser.crm,
+            data: novoDiagnostico.data,
+            especialidade: currentUser.especialidade || 'Clínico Geral',
+            status: 'realizada',
+            diagnosticoId: novoDiagnostico.id
+        });
+        localStorage.setItem('consultas', JSON.stringify(consultas));
+        
+        alert('Diagnóstico registrado com sucesso!');
+        window.location.href = 'medico-diagnostico.html';
+    } catch (error) {
+        console.error('Erro ao salvar diagnóstico:', error);
+        alert('Erro ao salvar diagnóstico. Por favor, tente novamente.');
+    }
+}
+
+// Função para logout
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'index.html';
+}
+
+// Função para inicializar a página
+function initDiagnosticoPage() {
+    // Atualiza o ano no footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Configura data/hora padrão para agora
+    const now = new Date();
+    const timezoneOffset = now.getTimezoneOffset() * 60000;
+    const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
+    document.getElementById('dataConsulta').value = localISOTime;
+    
+    // Verifica se o usuário está logado como médico
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!user || user.tipo !== 'medico') {
+        window.location.href = 'medico-login.html';
+    } else {
+        document.getElementById('user-name').textContent = user.nome;
+        document.getElementById('user-avatar').textContent = user.nome.charAt(0);
+    }
+    
+    // Event Listeners
+    document.getElementById('buscarPaciente').addEventListener('click', buscarPaciente);
+    document.getElementById('formDiagnostico').addEventListener('submit', salvarDiagnostico);
+    document.getElementById('cancelarBtn').addEventListener('click', () => {
+        window.location.href = 'medico-diagnostico.html';
+    });
+    document.getElementById('logout-btn').addEventListener('click', logout);
+}
+
+// Inicializa a página quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initDiagnosticoPage);
+
+
+// Função para buscar paciente por CPF
+function buscarPaciente() {
+    const cpf = document.getElementById('pacienteCpf').value.replace(/\D/g, '');
+    
+    if (cpf.length !== 11) {
+        alert('CPF inválido. Digite os 11 números do CPF.');
+        return;
+    }
+    
+    // Simulação de busca no "banco de dados"
+    const pacientes = JSON.parse(localStorage.getItem('pacientes')) || [];
+    const paciente = pacientes.find(p => p.cpf === cpf);
+    
+    if (paciente) {
+        document.getElementById('pacienteNome').textContent = paciente.nome;
+        document.getElementById('pacienteNascimento').textContent = new Date(paciente.dataNascimento).toLocaleDateString('pt-BR');
+        document.getElementById('pacienteSUS').textContent = paciente.cartaoSUS || 'Não informado';
+        
+        // Busca última consulta
+        const consultas = JSON.parse(localStorage.getItem('consultas')) || [];
+        const ultimaConsulta = consultas
+            .filter(c => c.pacienteCpf === cpf)
+            .sort((a, b) => new Date(b.data) - new Date(a.data))[0];
+        
+        document.getElementById('pacienteUltimaConsulta').textContent = ultimaConsulta 
+            ? new Date(ultimaConsulta.data).toLocaleString('pt-BR') 
+            : 'Nenhuma consulta registrada';
+        
+        document.getElementById('dadosPaciente').style.display = 'block';
+    } else {
+        alert('Paciente não encontrado. Verifique o CPF digitado.');
+        document.getElementById('dadosPaciente').style.display = 'none';
+    }
+}
+
+// Função para salvar diagnóstico
+function salvarDiagnostico(e) {
+    e.preventDefault();
+    
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const cpf = document.getElementById('pacienteCpf').value.replace(/\D/g, '');
+    
+    if (!currentUser || currentUser.tipo !== 'medico') {
+        alert('Acesso não autorizado');
+        window.location.href = 'medico-login.html';
+        return;
+    }
+    
+    const novoDiagnostico = {
+        id: Date.now(),
+        pacienteCpf: cpf,
+        medicoCrm: currentUser.crm,
+        medicoNome: currentUser.nome,
+        data: document.getElementById('dataConsulta').value,
+        sintomas: document.getElementById('sintomas').value,
+        diagnostico: document.getElementById('diagnostico').value,
+        prescricao: document.getElementById('prescricao').value,
+        observacoes: document.getElementById('observacoes').value,
+        dataRegistro: new Date().toISOString()
+    };
+    
+    // Salva no "banco de dados"
+    const diagnosticos = JSON.parse(localStorage.getItem('diagnosticos')) || [];
+    diagnosticos.push(novoDiagnostico);
+    localStorage.setItem('diagnosticos', JSON.stringify(diagnosticos));
+    
+    alert('Diagnóstico registrado com sucesso!');
+    window.location.href = 'medico-diagnostico.html';
+}
+
+// Função para logout
+function logout() {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'index.html';
+}
+
+// Função para inicializar a página
+function initDiagnosticoPage() {
+    // Atualiza o ano no footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Configura data/hora padrão para agora
+    const now = new Date();
+    const timezoneOffset = now.getTimezoneOffset() * 60000;
+    const localISOTime = (new Date(now - timezoneOffset)).toISOString().slice(0, 16);
+    document.getElementById('dataConsulta').value = localISOTime;
+    
+    // Verifica se o usuário está logado como médico
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    
+    if (!user || user.tipo !== 'medico') {
+        window.location.href = 'medico-login.html';
+    } else {
+        document.getElementById('user-name').textContent = user.nome;
+        document.getElementById('user-avatar').textContent = user.nome.charAt(0);
+    }
+    
+    // Event Listeners
+    document.getElementById('buscarPaciente').addEventListener('click', buscarPaciente);
+    document.getElementById('formDiagnostico').addEventListener('submit', salvarDiagnostico);
+    document.getElementById('cancelarBtn').addEventListener('click', () => {
+        window.location.href = 'medico-diagnostico.html';
+    });
+    document.getElementById('logout-btn').addEventListener('click', logout);
+}
+
+// Inicializa a página quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', initDiagnosticoPage);
+
+
+  
+// Adicionar ao script.js DADOS MOCKADOS
+// Mock de dados para pacientes, médicos, consultas e diagnósticos
+if (!localStorage.getItem('pacientes')) {
+    localStorage.setItem('pacientes', JSON.stringify([
+        {
+            id: 1,
+            nome: "João Silva",
+            dataNascimento: "1990-01-01",
+            cpf: "12345678900",
+            telefone: "(11) 91234-5678",
+            email: "joaosilva@gmail.com",
+            tipo: "paciente",
+            senha: "senha123"
+        },
+        {
+            id: 2,
+            nome: "Maria Oliveira",
+            dataNascimento: "1985-05-15",
+            cpf: "98765432100",
+            telefone: "(11) 99876-5432",
+            email: "mariaoliveira@gmail.com",
+            tipo: "paciente",
+            senha: "senha456"
+        }
+    ]));
+}
+
+if (!localStorage.getItem('medicos')) {
+    localStorage.setItem('medicos', JSON.stringify([
+        {
+            id: 1,
+            nome: "Dr. João Silva",
+            crm: "SP123456",
+            especialidade: "Clínico Geral",
+            tipo: "medico",
+            senha: "senha123"
+        },
+        {
+            id: 2,
+            nome: "Dra. Maria Oliveira",
+            crm: "SP654321",
+            especialidade: "Pediatra",
+            tipo: "medico",
+            senha: "senha456"
+        }
+    ]));
+}
+
+
+if (!localStorage.getItem('consultas')) {
+    localStorage.setItem('consultas', JSON.stringify([
+        {
+            id: 1,
+            pacienteCpf: "12345678900",
+            medicoCrm: "SP123456",
+            data: "2023-07-20T14:00",
+            especialidade: "Clínico Geral",
+            status: "agendada"
+        }
+    ]));
+}
+
+if (!localStorage.getItem('diagnosticos')) {
+    localStorage.setItem('diagnosticos', JSON.stringify([
+        {
+            id: 1,
+            pacienteCpf: "12345678900",
+            medicoCrm: "SP123456",
+            data: "2023-06-15",
+            diagnostico: "Hipertensão estágio 1",
+            prescricao: "Mudanças na dieta e exercícios físicos"
+        }
+    ]));
+}
 

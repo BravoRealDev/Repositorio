@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde+ - Agendamento de Consultas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Saúde+</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#agendar">Agendar Consulta</a></li>
+                    <li><a href="#minhas-consultas">Minhas Consultas</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                    <li><button id="login-btn">Login</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>Agende sua consulta médica com facilidade</h2>
+                <p>Encontre os melhores profissionais e horários disponíveis</p>
+                <a href="#agendar" class="btn">Agendar agora</a>
+            </div>
+        </section>
+
+        <section id="especialidades" class="especialidades">
+            <div class="container">
+                <h2>Nossas Especialidades</h2>
+                <p class="subtitle">Confira as especialidades disponíveis para agendamento</p>
+                
+                <div class="especialidades-grid" id="especialidades-grid">
+                    <!-- Cards serão gerados dinamicamente via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="agendar" class="agendamento">
+            <div class="container">
+                <h2>Agendar Consulta</h2>
+                <div class="agendamento-form">
+                    <div class="form-group">
+                        <label for="especialidade">Especialidade:</label>
+                        <select id="especialidade">
+                            <option value="">Selecione uma especialidade</option>
+                            <option value="cardiologia">Cardiologia</option>
+                            <option value="dermatologia">Dermatologia</option>
+                            <option value="pediatria">Pediatria</option>
+                            <option value="ortopedia">Ortopedia</option>
+                            <option value="clinico-geral">Clínico Geral</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medico">Médico:</label>
+                        <select id="medico" disabled>
+                            <option value="">Selecione um médico</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="date" id="data" min="" required>
+                    </div>
+                    
+                    <div id="calendario" class="calendario-container">
+                        <h3>Horários Disponíveis</h3>
+                        <div class="calendario" id="horarios-disponiveis">
+                            <!-- Horários serão carregados via JavaScript -->
+                            <p>Selecione uma especialidade, médico e data para ver os horários disponíveis.</p>
+                        </div>
+                    </div>
+                    
+                    <button id="agendar-btn" class="btn" disabled>Agendar Consulta</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="minhas-consultas" class="consultas">
+            <div class="container">
+                <h2>Minhas Consultas</h2>
+                <div class="consultas-lista" id="consultas-lista">
+                    <!-- Consultas serão carregadas via JavaScript -->
+                    <p>Faça login para visualizar suas consultas agendadas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Saúde+. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
