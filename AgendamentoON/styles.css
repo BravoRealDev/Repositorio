@@ -342,6 +342,9 @@ header nav ul li a:hover {
 
 .especialidade-card {
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -355,12 +358,19 @@ header nav ul li a:hover {
 
 .especialidade-img {
     height: 180px;
+    width: 100%;    
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .especialidade-content {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    flex-grow: 1;
 }
 
 .especialidade-content h3 {
@@ -394,6 +404,7 @@ header nav ul li a:hover {
 
 .especialidade-btn {
     display: block;
+    width: 100%;       
     text-align: center;
     background-color: #3498db;
     color: white;
@@ -402,6 +413,9 @@ header nav ul li a:hover {
     text-decoration: none;
     font-weight: 500;
     transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    margin-top: auto; /* Faz o botão ficar na parte inferior do card */
 }
 
 .especialidade-btn:hover {

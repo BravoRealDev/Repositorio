@@ -32,27 +32,93 @@ document.addEventListener('DOMContentLoaded', function() {
             pediatria: [
                 { id: '5', nome: 'Dra. Patrícia Lima' },
                 { id: '6', nome: 'Dr. Rafael Almeida' }
+            ],
+            ortopedia: [
+                { id: '7', nome: 'Dr. Felipe Martins' },
+                { id: '8', nome: 'Dra. Beatriz Rocha' }
+            ],
+            ginecologia: [
+                { id: '9', nome: 'Dra. Fernanda Dias' },
+                { id: '10', nome: 'Dr. André Mendes' }
+            ],
+            oftalmologia: [
+                { id: '11', nome: 'Dr. Lucas Pereira' },
+                { id: '12', nome: 'Dra. Camila Santos' }
+            ],
+            psiquiatria: [
+                { id: '13', nome: 'Dr. Eduardo Lima' },
+                { id: '14', nome: 'Dra. Mariana Ferreira' }
+            ],
+            endocrinologia: [
+                { id: '15', nome: 'Dr. Tiago Martins' },
+                { id: '16', nome: 'Dra. Larissa Almeida' }
+            ],
+            neurologia: [
+                { id: '17', nome: 'Dr. Gustavo Rocha' },
+                { id: '18', nome: 'Dra. Vanessa Costa' }
+            ],
+            clinicoGeral: [
+                { id: '19', nome: 'Dr. João Silva' },
+                { id: '20', nome: 'Dra. Maria Oliveira' }
             ]
+
         },
         especialidades: [
             {
                 id: 'cardiologia',
                 nome: 'Cardiologia',
-                descricao: 'Especialidade médica que trata do coração e sistema cardiovascular.',
-                imagem: 'https://images.unsplash.com/photo-1581595219315-a187dd40c322?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                descricao: 'Especialidade médica que trata do coração e sistema cardiovascular. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-abstrato-de-hipertensao_335657-4603.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
             },
             {
                 id: 'dermatologia',
                 nome: 'Dermatologia',
-                descricao: 'Especialidade médica que trata da pele, cabelos e unhas.',
-                imagem: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
+                descricao: 'Especialidade médica que trata da pele, cabelos e unhas. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/ilustracao-de-arte-de-uma-linha-desenhada-a-mao_23-2149281403.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
             },
             {
                 id: 'pediatria',
                 nome: 'Pediatria',
-                descricao: 'Especialidade médica dedicada à saúde de crianças e adolescentes.',
-                imagem: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'
-            }
+                descricao: 'Especialidade médica dedicada à saúde de crianças e adolescentes. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/medico-e-paciente-tratamento-de-crianca-no-hospital-hmpv-ou-metapneumovirus-humano_40876-3811.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'ortopedia',
+                nome: 'Ortopedia',
+                descricao: 'Especialidade médica que trata de problemas nos ossos e articulações. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/conjunto-de-icones-de-cor-de-ortopedia_1284-11320.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'ginecologia',
+                nome: 'Ginecologia',
+                descricao: 'Especialidade médica que cuida da saúde da mulher. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-de-ginecologia_23-2148651431.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'oftalmologia',
+                nome: 'Oftalmologia',
+                descricao: 'Especialidade médica que cuida da saúde dos olhos. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-premium/o-medico-esta-examinando-a-visao-do-olho-exame-olhos-pessoas-tratamento-de-correcao-de-foco-oftalmologia-optometrista-oftalmologista-pessoal-medico-com-oculos-teste-de-visao-apartamento_352905-153.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'psiquiatria',
+                nome: 'Psiquiatria',
+                descricao: 'Especialidade médica que trata de doenças mentais. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/saude-mental-entender-o-vetor-do-cerebro_53876-79082.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'endocrinologia',
+                nome: 'Endocrinologia',
+                descricao: 'Especialidade médica que cuida de doenças hormonais e metabólicas. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/ilustracao-de-tireoide-de-design-plano-desenhado-a-mao_23-2149312211.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            },
+            {
+                id: 'neurologia',
+                nome: 'Neurologia',
+                descricao: 'Especialidade médica que cuida de doenças do sistema nervoso. <strong>Tempo máximo de consulta: 30 minutos.</strong>',
+                imagem: 'https://img.freepik.com/vetores-gratis/ilustracao-do-conceito-de-quimica-do-cerebro_114360-13526.jpg?ga=GA1.1.1044485151.1745371656&semt=ais_hybrid&w=740'
+            }            
+
         ],
         usuarios: [
             {
@@ -146,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Funções de agendamento
     function renderEspecialidades() {
         elements.especialidadesGrid.innerHTML = state.especialidades.map(esp => `
-            <div class="especialidade-card">
+            <div class="especialidade-card" data-especialidade="${esp.id}">
                 <div class="especialidade-img" style="background-image: url('${esp.imagem}')"></div>
                 <div class="especialidade-content">
                     <h3>${esp.nome}</h3>
@@ -160,15 +226,47 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
 
         // Adiciona eventos aos botões
+        document.querySelectorAll('.especialidade-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.especialidade-btn')) return; // Ignora clique no botão
+                const especialidadeId = this.dataset.especialidade;
+                redirecionarParaAgendamento(especialidadeId);
+            });
+        });
+
         document.querySelectorAll('.especialidade-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const espId = this.dataset.especialidade;
-                elements.especialidadeSelect.value = espId;
-                loadMedicos();
-                document.querySelector('#agendar').scrollIntoView({ behavior: 'smooth' });
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); // Impede o evento de click no card
+                const card = this.closest('.especialidade-card');
+                redirecionarParaAgendamento(card.dataset.especialidade);
             });
         });
     }
+
+
+    
+
+    //Função para redirecionar para o agendamento
+    function redirecionarParaAgendamento(especialidadeId) {
+        const agendarSection = document.querySelector('#agendar');
+        if (!agendarSection) {
+            console.error('Seção de agendamento não encontrada!');
+            return;
+        }
+        agendarSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        if (elements.especialidadeSelect) {
+            elements.especialidadeSelect.value = especialidadeId;
+            loadMedicos();
+            elements.especialidadeSelect.style.border = "2px solid #007bff"; // Adiciona borda azul
+            setTimeout(() => {
+                elements.especialidadeSelect.style.border = ""; // Remove a borda após 2 segundos
+            }, 2000);
+        } else {
+            console.error('Elemento de especialidade não encontrado!');
+        }
+    }
+
 
     function loadMedicos() {
         const espId = elements.especialidadeSelect.value;
@@ -197,10 +295,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setMinDate() {
         const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0); // Zera horas, minutos e segundos
         const amanha = new Date(hoje);
         amanha.setDate(hoje.getDate() + 1);
         
         elements.dataInput.min = formatDateForInput(amanha);
+
+        //validação de data
+        elements.dataInput.addEventListener('change', function() {
+            const selectedDate = new Date(this.value);
+            if (selectedDate < hoje) {
+                showError('Data inválida. Selecione uma data a partir de amanhã.');
+                this.value = '';
+                resetAgendamentoForm();
+            }
+        });      
+            
     }
 
     function loadHorarios() {
@@ -327,14 +437,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const horario = state.horarioSelecionado;
 
         // Verifica conflito
-        const conflito = state.consultas.some(c => 
-            c.medicoId === medicoId && 
+        const conflitoUsuario = state.consultas.some(c => 
+            c.usuarioId === state.usuarioLogado.id && 
             c.data === data && 
             c.horario === horario
         );
         
-        if (conflito) {
-            showError('Este horário já está ocupado. Por favor, selecione outro.');
+        if (conflitoUsuario) {
+            showError('Você já tem uma consulta agendada para este horário.');
             loadHorarios();
             return;
         }
@@ -404,6 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="consulta-card">
                 <h3>${consulta.especialidade}</h3>
                 <p><strong>Médico:</strong> ${consulta.medicoNome}</p>
+                <p><strong>Especialidade:</strong> ${consulta.especialidade}</p>
                 <p><strong>Data:</strong> ${consulta.dataExibicao}</p>
                 <p><strong>Horário:</strong> ${consulta.horario}</p>
                 <p><strong>Status:</strong> <span class="status-${consulta.status.toLowerCase()}">${consulta.status}</span></p>
