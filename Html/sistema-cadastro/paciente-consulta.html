@@ -6,15 +6,17 @@
     <title>Minhas Consultas | Saúde Pública</title>
     <link rel="icon" href="assets/icons/health-icon.png">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Incluindo Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <header>
+    <header class="main-header">
         <div class="header-content">
             <h1>Sistema de Saúde Pública</h1>
             <p>Gestão integrada de saúde para a população</p>
         </div>
-        <nav>
+        <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Início</a></li>
                 <li><a href="paciente-consulta.html" class="active">Consultas</a></li>
@@ -31,10 +33,44 @@
     <main>
         <section class="dashboard-section">
             <div class="hero-content">
-                <h2>Minhas Consultas</h2>
-                <p>Acompanhe suas consultas médicas agendadas.</p>
+                <h2>Meu Painel de Consultas</h2>
+                <p>Acompanhe e gerencie suas consultas médicas agendadas.</p>
             </div>
+
+            <!-- Cards de Resumo -->
+            <div class="dashboard-cards">
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div class="card-info">
+                        <h4>Próxima Consulta</h4>
+                        <p id="proxima-consulta">--</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div class="card-info">
+                        <h4>Consultas Agendadas</h4>
+                        <p id="total-agendadas">0</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-check-double"></i>
+                    </div>
+                    <div class="card-info">
+                        <h4>Consultas Realizadas</h4>
+                        <p id="total-realizadas">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabela de Consultas -->
             <div class="dashboard-content">
+                <h3>Histórico Completo</h3>
                 <table id="tabelaConsultas">
                     <thead>
                         <tr>
@@ -46,6 +82,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Linha de exemplo para quando não há dados -->
+                        <tr id="sem-consultas" style="display: none;">
+                            <td colspan="5">Nenhuma consulta encontrada.</td>
+                        </tr>
                         <!-- Consultas serão carregadas via JavaScript -->
                     </tbody>
                 </table>
@@ -54,7 +94,7 @@
     </main>
     
     <footer>
-        <p>&copy; <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
+        <p>© <span id="current-year"></span> Sistema de Saúde Pública. Todos os direitos reservados.</p>
     </footer>
 </body>
 </html>

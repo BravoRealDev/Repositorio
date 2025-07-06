@@ -1099,3 +1099,113 @@ if (!localStorage.getItem('diagnosticos')) {
     ]));
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    // --- DADOS DE EXEMPLO ---
+    // Em um projeto real, esses dados viriam de uma API/banco de dados.
+    const consultasData = [
+        { data: '2024-05-28', horario: '14:00', medico: 'Dr. Carlos Andrade', status: 'Realizada' },
+        { data: '2024-06-15', horario: '10:30', medico: 'Dra. Beatriz Lima', status: 'Realizada' },
+        { data: '2024-07-22', horario: '09:00', medico: 'Dr. Carlos Andrade', status: 'Agendada' },
+        { data: '2024-07-25', horario: '11:00', medico: 'Dr. Ricardo Souza', status: 'Agendada' },
+        { data: '2024-08-05', horario: '16:00', medico: 'Dra. Beatriz Lima', status: 'Agendada' },
+        { data: '2024-05-10', horario: '08:00', medico: 'Dr. Ricardo Souza', status: 'Cancelada' }
+    ];
+
+    // Função para carregar as consultas na tabela
+    function carregarConsultas() {
+        const tabelaBody = document.querySelector('#tabelaConsultas tbody');
+        tabelaBody.innerHTML = ''; // Limpa a tabela antes de preencher
+
+        if (consultasData.length === 0) {
+            document.getElementById('sem-consultas').style.display = 'table-row';
+            return;
+        }
+
+        // Ordenar consultas por data (mais recentes primeiro)
+        consultasData.sort((a, b) => new Date(b.data) - new Date(a.data));
+
+        consultasData.forEach(consulta => {
+            const tr = document.createElement('tr');
+
+            // Formatar data para o padrão brasileiro (dd/mm/yyyy)
+            const dataFormatada = new Date(consulta.data + 'T00:00:00').toLocaleDateString('pt-BR');
+
+            // Criar uma classe para o status para poder estilizar
+            const statusClass = 'status-' + consulta.status.toLowerCase();
+
+            tr.innerHTML = `
+                <td>${dataFormatada}</td>
+                <td>${consulta.horario}</td>
+                <td>${consulta.medico}</td>
+                <td><span class="status ${statusClass}">${consulta.status}</span></td>
+                <td>
+                    <button class="btn-action btn-details" title="Ver Detalhes">Detalhes</button>
+                    ${consulta.status === 'Agendada' ? '<button class="btn-action btn-cancel" title="Cancelar Consulta">Cancelar</button>' : ''}
+                </td>
+            `;
+            tabelaBody.appendChild(tr);
+        });
+
+        adicionarEventListenersAcoes();
+    }
+    
+    // Função para atualizar os cards de resumo
+    function atualizarCards() {
+        const totalAgendadas = consultasData.filter(c => c.status === 'Agendada').length;
+        const totalRealizadas = consultasData.filter(c => c.status === 'Realizada').length;
+        
+        // Encontrar a próxima consulta
+        const proximasConsultas = consultasData
+            .filter(c => c.status === 'Agendada' && new Date(c.data) >= new Date())
+            .sort((a, b) => new Date(a.data) - new Date(b.data));
+
+        let proximaConsultaTexto = 'Nenhuma';
+        if (proximasConsultas.length > 0) {
+            const proxima = proximasConsultas[0];
+            const dataFormatada = new Date(proxima.data + 'T00:00:00').toLocaleDateString('pt-BR');
+            proximaConsultaTexto = `${dataFormatada} às ${proxima.horario}`;
+        }
+        
+        document.getElementById('total-agendadas').textContent = totalAgendadas;
+        document.getElementById('total-realizadas').textContent = totalRealizadas;
+        document.getElementById('proxima-consulta').textContent = proximaConsultaTexto;
+    }
+    
+    // Função para adicionar listeners aos botões de ação
+    function adicionarEventListenersAcoes() {
+        document.querySelectorAll('.btn-details').forEach(button => {
+            button.addEventListener('click', () => alert('Funcionalidade "Detalhes" a ser implementada.'));
+        });
+
+        document.querySelectorAll('.btn-cancel').forEach(button => {
+            button.addEventListener('click', () => {
+                if (confirm('Tem certeza que deseja cancelar esta consulta?')) {
+                    alert('Consulta cancelada! (Esta é uma simulação)');
+                    // Aqui você adicionaria a lógica para atualizar o status da consulta
+                }
+            });
+        });
+    }
+
+    // Funcionalidade do botão de Sair
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Você foi desconectado.');
+            // Redirecionar para a página de login, por exemplo
+            window.location.href = 'login.html'; 
+        });
+    }
+
+    // Atualizar ano no rodapé
+    const currentYearSpan = document.getElementById('current-year');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Iniciar o carregamento dos dados
+    carregarConsultas();
+    atualizarCards();
+});
