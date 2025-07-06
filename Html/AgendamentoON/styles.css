@@ -1,4 +1,4 @@
-/* Reset e Estilos Globais */
+/* Estilos Gerais */
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +19,7 @@ body {
     padding: 0 15px;
 }
 
+/* Reutilizáveis */
 .btn {
     display: inline-block;
     background-color: #2c3e50;
@@ -29,21 +30,22 @@ body {
     cursor: pointer;
     text-decoration: none;
     font-size: 16px;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .btn:hover {
     background-color: #1a252f;
 }
 
-/* Header */
+/* Layout e Navegação */
 header {
     background-color: #2c3e50;
     color: white;
     padding: 20px 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 header .container {
@@ -59,6 +61,7 @@ header h1 {
 header nav ul {
     display: flex;
     list-style: none;
+    align-items: center;
 }
 
 header nav ul li {
@@ -68,7 +71,7 @@ header nav ul li {
 header nav ul li a {
     color: white;
     text-decoration: none;
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 header nav ul li a:hover {
@@ -84,7 +87,7 @@ header nav ul li a:hover {
     background-color: #2980b9;
 }
 
-/* Hero Section */
+/* Página Inicial */
 .hero {
     background-color: #3498db;
     color: white;
@@ -102,10 +105,100 @@ header nav ul li a:hover {
     margin-bottom: 30px;
 }
 
-/* Seção de Agendamento */
-.agendamento {
+/* Especialidades */
+.especialidades {
     padding: 60px 0;
     background-color: white;
+}
+
+.especialidades h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.especialidades .subtitle {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #7f8c8d;
+}
+
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.especialidade-card {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.especialidade-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 87, 158, 0.15);
+}
+
+.especialidade-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover; 
+}
+
+.especialidade-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    flex-grow: 1; 
+}
+
+.especialidade-content h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.especialidade-content p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 14px;
+    flex-grow: 1; 
+}
+
+.especialidade-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    margin-top: auto; 
+}
+
+.especialidade-btn:hover {
+    background-color: #2980b9;
+}
+
+.especialidade-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+
+/* Agendamento */
+.agendamento {
+    padding: 60px 0;
+    background-color: #f5f7fa;
 }
 
 .agendamento h2 {
@@ -117,8 +210,8 @@ header nav ul li a:hover {
 .agendamento-form {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #f8f9fa;
-    padding: 30px;
+    background-color: white;
+    padding: 40px;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -134,10 +227,10 @@ header nav ul li a:hover {
     color: #2c3e50;
 }
 
-.form-group select, 
+.form-group select,
 .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
@@ -145,7 +238,7 @@ header nav ul li a:hover {
 
 #agendar-btn {
     width: 100%;
-    padding: 12px;
+    padding: 15px;
     font-size: 18px;
     margin-top: 20px;
     background-color: #3498db;
@@ -160,61 +253,48 @@ header nav ul li a:hover {
     cursor: not-allowed;
 }
 
-/* Calendário de Horários */
 .calendario-container {
     margin-top: 30px;
-    
 }
 
 .calendario-container h3 {
     margin-bottom: 15px;
     color: #2c3e50;
-    gap: 10px;
-    grid-template-columns: repeat(2, 1fr); 
 }
 
 .calendario {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;    
-    width: 100%;   
-    gap: 5px;
-    margin-top: 20px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
 }
 
-.horario-btn {     
+.horario-btn {
     padding: 10px;
-    background-color: #37d679;
-    color: rgb(5, 5, 5);
-    border: black 1px solid;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100px;
-    
-    
-    
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    text-align: center;
 }
 
 .horario-btn:hover {
-    background-color: #288f53;
-}
-
-.horario-btn.ocupado {
-    background-color: #e74c3c;
-    cursor: not-allowed;
+    background-color: #ecf0f1;
+    border-color: #3498db;
 }
 
 .horario-btn.selecionado {
     background-color: #3498db;
+    color: white;
+    border-color: #3498db;
     font-weight: bold;
 }
 
-/* Seção de Minhas Consultas */
+
+/* Minhas Consultas*/
 .consultas {
     padding: 60px 0;
-    background-color: #f5f7fa;
 }
 
 .consultas h2 {
@@ -223,206 +303,179 @@ header nav ul li a:hover {
     color: #2c3e50;
 }
 
+.consultas-lista {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
 .consulta-card {
     background-color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
     margin-bottom: 20px;
 }
 
 .consulta-card h3 {
     color: #3498db;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .consulta-card p {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
 }
 
-.consulta-card .consulta-info {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.consulta-card .btn {
-    padding: 5px 10px;
+.cancelar-btn {
+    padding: 8px 12px;
     font-size: 14px;
     background-color: #e74c3c;
+    float: right;
 }
 
-.consulta-card .btn:hover {
+.cancelar-btn:hover {
     background-color: #c0392b;
 }
 
-/* Modal de Login */
+
+/* Contato */
+.contato-section {
+    padding: 60px 0;
+}
+
+.contato-section h2, .contato-section p {
+    text-align: center;
+}
+
+.contato-section p {
+    margin-bottom: 40px;
+    color: #555;
+}
+
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-form textarea {
+    resize: vertical; 
+}
+
+#form-feedback {
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+    display: none; 
+}
+
+#form-feedback.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+#form-feedback.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+/* modal de login */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 1001;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
     background-color: white;
-    margin: 10% auto;
+    margin: 15% auto;
     padding: 30px;
     border-radius: 8px;
     width: 90%;
     max-width: 400px;
     position: relative;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
 }
 
 .close {
     position: absolute;
-    right: 20px;
-    top: 10px;
+    right: 15px;
+    top: 15px;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
-    color: #333;
+    color: #aaa;
+    line-height: 1;
 }
 
 .close:hover {
-    color: #e74c3c;
+    color: #333;
 }
 
-/* Responsividade */
+/* ----- Responsividade Tablets e Telas Menores ----- */
 @media (max-width: 768px) {
     header .container {
         flex-direction: column;
+        gap: 15px;
     }
-    
+
     header nav ul {
-        margin-top: 20px;
         flex-direction: column;
-        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
     }
-    
+
     header nav ul li {
-        margin: 10px 0;
+        margin-left: 0;
     }
-    
+
     .hero h2 {
         font-size: 28px;
     }
-    
+
     .hero p {
         font-size: 16px;
     }
-    
-    .calendario {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+
+    .especialidades-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .agendamento-form, .contact-form {
+        padding: 25px;
     }
 }
 
-/* Seção de Especialidades */
-.especialidades {
-    padding: 60px 0;
-    background-color: #f8f9fa;
-}
 
-.especialidades .subtitle {
-    text-align: center;
-    margin-bottom: 40px;
-    color: #7f8c8d;
-}
+/* ----- Responsividade Celulares Pequenos ----- */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
 
-.especialidades-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
+    h2 {
+        font-size: 1.8rem;
+    }
 
-.especialidade-card {
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+    .btn {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+    }
 
-.especialidade-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-}
-
-.especialidade-img {
-    height: 180px;
-    width: 100%;    
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.especialidade-content {
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    flex-grow: 1;
-}
-
-.especialidade-content h3 {
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.especialidade-content p {
-    color: #7f8c8d;
-    margin-bottom: 20px;
-    font-size: 14px;
-}
-
-.disponibilidade {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.disponibilidade i {
-    margin-right: 8px;
-}
-
-.disponivel {
-    color: #2ecc71;
-}
-
-.indisponivel {
-    color: #e74c3c;
-}
-
-.especialidade-btn {
-    display: block;
-    width: 100%;       
-    text-align: center;
-    background-color: #3498db;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.3s;
-    border: none;
-    cursor: pointer;
-    margin-top: auto; /* Faz o botão ficar na parte inferior do card */
-}
-
-.especialidade-btn:hover {
-    background-color: #2980b9;
-}
-
-.especialidade-btn.desabilitado {
-    background-color: #95a5a6;
-    cursor: not-allowed;
+    .modal-content {
+        margin: 25% auto;
+        padding: 20px;
+    }
 }

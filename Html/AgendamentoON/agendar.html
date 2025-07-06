@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saúde+ - Agendar Consulta</title>
+    <meta name="description" content="Agende sua consulta médica com facilidade. Encontre os melhores profissionais e horários disponíveis.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Saúde+</h1>
+            <nav>
+                <ul>                    
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="agendar.html">Agendar Consulta</a></li>
+                    <li><a href="consultas.html">Minhas Consultas</a></li>
+                    <li><a href="contato.html">Contato</a></li>                    
+                    <li><button id="login-btn">Login</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="agendar" class="agendamento">
+            <div class="container">
+                <h2>Agendar Consulta</h2>
+                <div class="agendamento-form">
+                    <div class="form-group">
+                        <label for="especialidade">Especialidade:</label>
+                        <select id="especialidade">
+                            <option value="">Selecione uma especialidade</option>
+                            <option value="cardiologia">Cardiologia</option>
+                            <option value="dermatologia">Dermatologia</option>
+                            <option value="pediatria">Pediatria</option>
+                            <option value="ortopedia">Ortopedia</option>
+                            <option value="ginecologia">Ginecologia</option>
+                            <option value="oftalmologia">Oftalmologia</option>
+                            <option value="psiquiatria">Psiquiatria</option>
+                            <option value="endocrinologia">Endocrinologia</option>
+                            <option value="neurologia">Neurologia</option>
+                            <option value="clinicoGeral">Clínico Geral</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medico">Médico:</label>
+                        <select id="medico" disabled>
+                            <option value="">Selecione um médico</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="date" id="data" min="" required>
+                    </div>
+                    
+                    <div id="calendario" class="calendario-container">
+                        <h3>Horários Disponíveis</h3>
+                        <div class="calendario" id="horarios-disponiveis">
+                            <p>Selecione uma especialidade, médico e data para ver os horários disponíveis.</p>
+                        </div>
+                    </div>
+                    
+                    <button id="agendar-btn" class="btn" disabled>Agendar Consulta</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Saúde+. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- modal de Login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" id="senha" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

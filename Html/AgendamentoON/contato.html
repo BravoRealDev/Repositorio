@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Saúde+ - Contato</title>    
+    <meta name="description" content="Entre em contato conosco para agendar consultas, esclarecer dúvidas ou obter mais informações sobre nossos serviços.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Saúde+</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="agendar.html">Agendar Consulta</a></li>
+                    <li><a href="consultas.html">Minhas Consultas</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><button id="login-btn">Login</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="contato" class="contato-section">
+            <div class="container">
+                <h2>Fale Conosco</h2>
+                <p>Tem alguma dúvida ou sugestão? Preencha o formulário abaixo.</p>
+
+                <!-- formulário -->
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contato-email">E-mail:</label>
+                        <input type="email" id="contato-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="assunto">Assunto:</label>
+                        <input type="text" id="assunto" name="assunto" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem:</label>
+                        <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+                    </div>
+                    
+                    <!-- feedback -->
+                    <div id="form-feedback"></div>
+
+                    <button type="submit" class="btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Saúde+. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- modal do login -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group"><label for="email">E-mail:</label><input type="email" id="email" required></div>
+                <div class="form-group"><label for="senha">Senha:</label><input type="password" id="senha" required></div>
+                <button type="submit" class="btn">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
